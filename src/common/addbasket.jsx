@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { Grid, Segment, Button, Icon, Input } from "semantic-ui-react";
+import { Label, Segment, Button, Icon } from "semantic-ui-react";
 
 class AddBasket extends Component {
   state = { basketNew: "" };
 
-  handleChange = (event, { name, value }) => {
-    if (this.state.hasOwnProperty(name)) {
-      this.setState({ [name]: value });
-    }
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   initialEdit = () => {
@@ -19,142 +17,91 @@ class AddBasket extends Component {
   };
 
   render() {
-    let { updateBasket, onEditClick, edit, closeEdit, basket } = this.props;
+    let { updateBasket, onEditClick, edit, basket } = this.props;
 
     const basketValue = edit ? this.state.basketNew : basket.name;
 
     const secondary = !edit && !basket.name;
+    const color = secondary ? "grey" : "black";
+    const opacity = secondary ? "0.4" : "0.9";
 
     return (
       <React.Fragment>
-        <Grid>
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <Segment
-                className="pointer"
-                onClick={event => {
-                  this.initialEdit();
-                  onEditClick(basket._id);
-                }}
-                basic={secondary}
-              >
-                {!edit && basket.name && (
-                  <div>
-                    <Icon name="pencil alternate"></Icon>
-                    <span className="black big-font">
-                      {basket.name || "Add New"}
-                    </span>
-                  </div>
-                )}
+        <Segment
+          className="pointer segmentinlinebox"
+          onClick={event => {
+            this.initialEdit();
+            onEditClick(basket._id);
+          }}
+          style={{ height: "20vh", opacity: opacity }}
+          textAlign="center"
+          tertiary={secondary}
+          raised={secondary}
+        >
+          <Label attached="top" color="black"></Label>
 
-                {!edit && !basket.name && (
-                  <div>
-                    <Icon name="plus"></Icon>
-                    <span className="black big-font">
-                      {basket.name || "Add New"}
-                    </span>
-                  </div>
-                )}
-                {edit && (
-                  <div>
-                    <Input
-                      autoFocus
-                      fluid
-                      type="text"
-                      onChange={this.handleChange}
-                      className="black big-font"
-                      value={basketValue}
-                      name="basketNew"
-                      transparent
-                    />
-                  </div>
-                )}
-              </Segment>
-              {edit && (
-                <Segment.Inline>
-                  <Button
-                    icon
-                    basic
-                    color="black"
-                    floated="right"
-                    onClick={() => closeEdit(basket._id)}
-                  >
-                    <Icon name="undo"></Icon>
-                  </Button>
-                  <Button
-                    icon
-                    basic
-                    color="black"
-                    floated="right"
-                    onClick={() => updateBasket(basket._id, basketValue)}
-                  >
-                    <Icon name="checkmark"></Icon>
-                  </Button>
-                </Segment.Inline>
-              )}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+          {!edit && (
+            <div
+              style={{
+                position: "relative",
+                top: "30%",
+                transform: "translateY(-50%)"
+              }}
+            >
+              {!basket.name && <Icon name="plus"></Icon>}
+              <p className={`ow big-font ${color}`}>
+                {basket.name || "Add New"}
+              </p>
+            </div>
+          )}
+
+          {edit && (
+            <textarea
+              type="text"
+              className="black big-font-mobile "
+              value={basketValue}
+              name="basketNew"
+              style={{ minHeight: "12vh" }}
+              onChange={this.handleChange}
+              maxLength={50}
+              autoFocus
+              onFocus={e => {
+                var temp_value = e.target.value;
+                e.target.value = "";
+                e.target.value = temp_value;
+              }}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  updateBasket(basket._id, basketValue);
+                }
+              }}
+            />
+          )}
+        </Segment>
+        {edit && (
+          <div style={{ marginTop: "0px" }}>
+            <Segment.Inline>
+              <Button
+                icon
+                basic
+                color="grey"
+                floated="right"
+                onClick={() => updateBasket(basket._id, "")}
+              >
+                <Icon name="trash alternate outline "></Icon>
+              </Button>
+              <Button
+                icon="checkmark"
+                basic
+                color="black"
+                onClick={() => updateBasket(basket._id, basketValue)}
+              ></Button>
+            </Segment.Inline>
+          </div>
+        )}
       </React.Fragment>
     );
   }
 }
 
 export default AddBasket;
-
-/*
-<div>
-                  <span onClick={() => updateBasket(basket._id, basketValue)}>
-                    <Icon name="checkmark" bordered />
-                  </span>
-                  <span> </span>
-                  <span onClick={() => closeEdit(basket._id)}>
-                    <Icon name="close" bordered />
-                  </span>
-                </div>
-
-                <Input
-                  autoFocus
-                  fluid
-                  type="text"
-                  onChange={this.handleChange}
-                  value={basket}
-                  icon={<Icon name="check" link onClick={this.test} />}
-                  transparent
-                />
-
-      <Modal
-        large
-        onClose={this.closeModal}
-        trigger={
-          <Grid>
-            <Grid.Row columns={1}>
-              <Grid.Column>
-                <Segment textAlign="justified" className="pointer">
-                  <Icon name="pencil alternate"></Icon>
-                  <span className="black big-font"> {basket}</span>
-                </Segment>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        }
-        centered={false}
-      >
-        <Modal.Content form>
-          <Segment.Inline>
-            <Form>
-              <Form.Field inline>
-                <Input
-                  autoFocus
-                  fluid
-                  type="text"
-                  onChange={this.handleChange}
-                  value={basket}
-                  icon={<Icon name="check" link onClick={this.test} />}
-                />
-              </Form.Field>
-            </Form>
-          </Segment.Inline>
-        </Modal.Content>
-      </Modal>
-      */

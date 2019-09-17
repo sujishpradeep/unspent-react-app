@@ -3,7 +3,7 @@
 
 .main-first {
   --background: linear-gradient(135deg, rgb(0, 121, 191), rgb(80, 103, 197));
-  background: linear-gradient(135deg, #a059c7, #9346bd);
+  background: linear-gradient(90deg, #a059c7, #9346bd);
 
   color: white;
 }

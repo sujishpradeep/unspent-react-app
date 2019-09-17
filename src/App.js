@@ -25,13 +25,17 @@ class App extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   render() {
     const { token } = this.state;
+    console.log("Render APP ", token);
     return (
       <Router>
         <Switch>
           {!token && <Route path="/login" component={Login} />}
           {!token && <Route path="/signup" component={SignUp} />}
           {!token && <Route path="/" component={LandingPage} />}
-          <NavBar fullname={token && token.fullname}></NavBar>
+          <NavBar
+            fullname={token && token.fullname}
+            accountid={token && token.accountid}
+          ></NavBar>
         </Switch>
       </Router>
     );

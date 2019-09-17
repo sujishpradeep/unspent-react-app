@@ -35,19 +35,6 @@ class NewRedeem extends Component {
     availableAmount: ""
   };
 
-  async componentDidMount() {
-    const { data } = await getBoxes(this.props.id);
-
-    const baskets = data.map((d, index) => ({
-      _id: index,
-      name: d
-    }));
-
-    console.log("redeem baskets", baskets);
-
-    this.setState({ baskets });
-  }
-
   handleSubmit = () => {
     const { error } = this.validateRedeem();
     if (error) {
@@ -91,12 +78,14 @@ class NewRedeem extends Component {
     }
   };
 
-  loadModal = () => {
-    const { currentDate, availableAmount } = this.props;
+  loadModal = async () => {
+    const { currentDate, availableAmount, baskets } = this.props;
     let { redeem, errors } = this.state;
     redeem.box = "";
     redeem.date = currentDate;
     redeem.amount = "";
+
+    console.log("redeem baskets", baskets);
 
     errors = {};
     this.setState({
@@ -105,6 +94,7 @@ class NewRedeem extends Component {
       currentDate: currentDate,
       redeem,
       errors,
+      baskets,
       availableAmount
     });
   };

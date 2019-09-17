@@ -7,9 +7,10 @@ import { saveItem, getItems } from "../utils/testUnspentService";
 import Moment from "moment";
 import Activity from "../common/activity";
 import { getAccount, addRedeem, addReward } from "../services/accountService";
+import authservice from "../services/authservice";
 
 class Rewards extends Component {
-  state = { redeems: [], rewards: [], id: "5d7882687cab219112a4e31c" };
+  state = { redeems: [], rewards: [], id: "", baskets: [] };
 
   handleRewardSubmit = async reward => {
     let rewards = [...this.state.rewards];
@@ -54,12 +55,18 @@ class Rewards extends Component {
   };
 
   async componentDidMount() {
-    const id = this.state.id;
+    const token = authservice.getCurrentUser();
+    const id = token && token.accountid;
+    console.log("componentDidMount REWARD ", id);
     const { data } = await getAccount(id);
-    const { rewards } = data;
-    const { redeems } = data;
+    const { rewards, redeems } = data;
 
-    this.setState({ rewards, redeems });
+    const baskets = data.boxes.map((d, index) => ({
+      _id: index,
+      name: d
+    }));
+
+    this.setState({ rewards, redeems, id, baskets });
   }
 
   getAmounts(rewards, redeems) {
@@ -87,7 +94,8 @@ class Rewards extends Component {
   }
 
   render() {
-    const { rewards, redeems, id } = this.state;
+    const { rewards, redeems, baskets } = this.state;
+    console.log("Render Rewards", baskets);
     const { grossRewards, grossUsage, availableAmount } = this.getAmounts(
       rewards,
       redeems
@@ -104,7 +112,7 @@ class Rewards extends Component {
           availableAmount={availableAmount}
           grossRewards={grossRewards}
           grossUsage={grossUsage}
-          id={id}
+          baskets={baskets}
         ></Unspend>
         <Divider hidden></Divider>
         <Divider hidden></Divider>

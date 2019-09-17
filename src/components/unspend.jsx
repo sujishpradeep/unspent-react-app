@@ -43,7 +43,7 @@ class Unspend extends NewReward {
       grossRewards,
       grossUsage,
       onRedeemSubmit,
-      id
+      baskets
     } = this.props;
 
     return (
@@ -64,7 +64,7 @@ class Unspend extends NewReward {
                 availableAmount={availableAmount}
                 grossUsage={grossUsage}
                 onRedeemSubmit={onRedeemSubmit}
-                id={id}
+                baskets={baskets}
               ></NewRedeem>
             </Grid.Column>
           </Grid>

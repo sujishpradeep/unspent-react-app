@@ -64,8 +64,15 @@ body {
 }
 
 .big-font {
-  font-weight: 550;
+  font-weight: 520;
+  font-size: 16px;
 }
+
+.big-font-mobile {
+  font-weight: 520;
+  font-size: 14px;
+}
+
 .ar {
   float: right;
   color: #2d2d2d;
@@ -307,6 +314,13 @@ h1 {
     margin: 0 25vw;
   }
 
+  .big-font {
+    font-weight: 550;
+    font-size: 20px;
+  }
+  .big-font-mobile {
+    font-size: 20px;
+  }
   #navbar {
     height: 5vw;
   }
@@ -413,4 +427,48 @@ h1 {
 
 .tal {
   text-align: left;
+}
+
+.ow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  --hyphens: auto;
+}
+
+.segmentinlinebox {
+  box-shadow: 10px 10px 10px black;
+  border: solid 10px black;
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  border: 1px solid rgb(238, 236, 236);
+  outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::-webkit-resizer {
+  display: none;
+  -webkit-appearance: none;
+}
+
+textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
 }

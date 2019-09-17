@@ -139,6 +139,12 @@ class NavBar extends Component {
               <div className="main-container">
                 <Route path="/boxes" component={Boxes} />
                 <Route
+                  path="/rewards"
+                  render={props => (
+                    <Rewards {...props} accountid={this.props.accountid} />
+                  )}
+                />
+                <Route
                   path="/user"
                   render={props => (
                     <User {...props} fullname={this.props.fullname} />
@@ -146,7 +152,6 @@ class NavBar extends Component {
                 />
 
                 <Route path="/logout" component={Logout} />
-                <Route path="/rewards" component={Rewards} />
                 <Route path="/" exact component={Rewards} />
               </div>
             </Sidebar.Pusher>

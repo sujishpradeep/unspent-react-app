@@ -16,24 +16,19 @@ class Activity extends Component {
         <Item>
           <Item.Content>
             <div className="head inline black">
-              {" "}
-              ${activity.amount}.00 {sign}{" "}
+              {sign} ${activity.amount}.00
             </div>
+            <span className="ar black">
+              {displayDate}
+              <Icon name="calendar alternate outline"></Icon>
+            </span>
 
             <Item.Meta>
-              <span className="grey">
-                <b>{activity.category || activity.box}</b>
-              </span>
-              <span className="ar ">
-                <b className="black">{displayDate}</b>
-                <Icon
-                  name="calendar alternate outline"
-                  className="black"
-                ></Icon>
-              </span>
+              <span className="black">{activity.category || activity.box}</span>
             </Item.Meta>
+
             <Item.Description>
-              <p className="black"> {activity.notes}</p>
+              <p className="grey ow">{activity.notes}</p>
             </Item.Description>
           </Item.Content>
         </Item>

@@ -34,12 +34,12 @@ class LandingPage extends Component {
               <div className="pl5 inline"></div>
 
               <Button
-                positive
+                color="violet"
                 onClick={() => {
                   window.location = "/signup";
                 }}
               >
-                Sign up
+                <b>Sign up</b>
               </Button>
             </div>
           </div>

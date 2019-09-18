@@ -137,7 +137,10 @@ class NavBar extends Component {
 
             <Sidebar.Pusher>
               <div className="main-container">
-                <Route path="/boxes" component={Boxes} />
+                <Route
+                  path="/boxes"
+                  render={props => <Boxes {...props} isMobile={isMobile} />}
+                />
                 <Route
                   path="/rewards"
                   render={props => (

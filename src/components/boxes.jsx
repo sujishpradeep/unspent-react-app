@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Segment, Item } from "semantic-ui-react";
+import { Grid, Button, Item } from "semantic-ui-react";
 import AddBasket from "../common/addbasket";
 import { saveBox } from "../utils/testRedeemBoxes";
 import { getBoxes, updateBoxes } from "../services/accountService";
 import authservice from "../services/authservice";
+import OutsideClickHandler from "react-outside-click-handler";
 
 class Boxes extends Component {
   state = {
@@ -28,7 +29,7 @@ class Boxes extends Component {
     this.setState({ baskets, id });
   }
 
-  updateBasket = (id, value) => {
+  updateBasket = async (id, value) => {
     let { baskets } = this.state;
     const foundIndex = baskets.findIndex(m => m._id === id);
 
@@ -51,7 +52,7 @@ class Boxes extends Component {
       name: boxes[index]
     }));
 
-    updateBoxes(this.state.id, boxes);
+    await updateBoxes(this.state.id, boxes);
 
     this.setState({ baskets: baskets2 });
 
@@ -79,10 +80,15 @@ class Boxes extends Component {
     }
     console.log("render baskets", baskets, editBasket);
 
+    const { isMobile } = this.props;
+
+    const padding = isMobile ? "0" : "10vh";
+    const styles = { padding: `0 ${padding}` };
+
     return (
       <React.Fragment>
-        <Item.Group>
-          <Grid columns={2} rows={3}>
+        <div style={styles}>
+          <Grid columns={2}>
             {boxes.map(b => (
               <Grid.Column style={{ height: "30vh" }}>
                 <AddBasket
@@ -92,11 +98,12 @@ class Boxes extends Component {
                   onEditClick={this.onEditClick}
                   closeEdit={this.closeEdit}
                   edit={editBasket._id === b._id}
+                  isMobile={isMobile}
                 ></AddBasket>
               </Grid.Column>
             ))}
           </Grid>
-        </Item.Group>
+        </div>
       </React.Fragment>
     );
   }

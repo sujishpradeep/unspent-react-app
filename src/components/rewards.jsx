@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Divider } from "semantic-ui-react";
+import { Header, Divider, Segment, Button, Icon } from "semantic-ui-react";
 import Unspend from "./unspend";
 import Balance from "./Balance";
 import Transactions from "./Transactions";
@@ -106,6 +106,9 @@ class Rewards extends Component {
     return (
       <React.Fragment>
         <Header as="h2" className="ac"></Header>
+        <Segment>
+          <Header as="h2">Add Rewards</Header>
+        </Segment>
         <Unspend
           onRewardSubmit={this.handleRewardSubmit}
           onRedeemSubmit={this.handleRedeemSubmit}
@@ -114,14 +117,25 @@ class Rewards extends Component {
           grossUsage={grossUsage}
           baskets={baskets}
         ></Unspend>
+
+        <Segment>
+          <Header as="h2">Add Rewards</Header>
+        </Segment>
+
+        <Segment>
+          <Header as="h2">Add Rewards</Header>
+        </Segment>
+
+        <Divider hidden></Divider>
+
+        <Transactions transactions={transactions}></Transactions>
         <Divider hidden></Divider>
         <Divider hidden></Divider>
+        <Divider hidden></Divider>
+
         <Divider hidden></Divider>
         <Divider hidden></Divider>
         <Balance availableAmount={availableAmount}></Balance>
-        <Divider hidden></Divider>
-        <Divider hidden></Divider>
-        <Transactions transactions={transactions}></Transactions>
       </React.Fragment>
     );
   }

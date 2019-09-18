@@ -112,9 +112,8 @@ class NewReward extends Component {
               onClick={this.loadModal}
               circular
               textalign="center"
-              color="black"
+              color="orange"
               icon="plus"
-              basic
             ></Button>
           }
           centered={false}

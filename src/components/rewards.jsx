@@ -106,9 +106,20 @@ class Rewards extends Component {
     return (
       <React.Fragment>
         <Header as="h2" className="ac"></Header>
-        <Segment>
-          <Header as="h2">Add Rewards</Header>
+        {/* <Segment textAlign="center">
+          <div>
+            <Button color="pink" icon="add" circular></Button>
+            <span className="test block">Add Rewards </span>
+          </div>
         </Segment>
+
+        <Segment textAlign="center">
+          <div>
+            <Button color="pink" icon="add" circular></Button>
+            <span className="test block">Use Rewards </span>
+          </div>
+        </Segment> */}
+
         <Unspend
           onRewardSubmit={this.handleRewardSubmit}
           onRedeemSubmit={this.handleRedeemSubmit}
@@ -118,24 +129,24 @@ class Rewards extends Component {
           baskets={baskets}
         ></Unspend>
 
-        <Segment>
+        {/* <Segment>
           <Header as="h2">Add Rewards</Header>
         </Segment>
 
         <Segment>
           <Header as="h2">Add Rewards</Header>
-        </Segment>
+        </Segment> */}
 
         <Divider hidden></Divider>
 
         <Transactions transactions={transactions}></Transactions>
-        <Divider hidden></Divider>
+        {/* <Divider hidden></Divider>
         <Divider hidden></Divider>
         <Divider hidden></Divider>
 
         <Divider hidden></Divider>
         <Divider hidden></Divider>
-        <Balance availableAmount={availableAmount}></Balance>
+        <Balance availableAmount={availableAmount}></Balance> */}
       </React.Fragment>
     );
   }

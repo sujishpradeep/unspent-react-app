@@ -48,8 +48,8 @@ class Unspend extends NewReward {
 
     return (
       <React.Fragment>
-        <Segment>
-          <Grid columns={2} relaxed="very">
+        <Segment raised>
+          <Grid columns={2} relaxed="very" divided>
             <Grid.Column textAlign="center">
               <NewReward
                 currentDate={currentDate}
@@ -68,7 +68,6 @@ class Unspend extends NewReward {
               ></NewRedeem>
             </Grid.Column>
           </Grid>
-          <Divider vertical> And</Divider>
         </Segment>
       </React.Fragment>
     );

@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@semantic-ui-react/bootstrap": "^1.1.0",
     "axios": "^0.19.0",
     "font-awesome": "^4.7.0",
     "joi": "^14.3.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "npx": "^10.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-google-login": "^5.0.5",
@@ -17,14 +19,13 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.1.1",
     "semantic-ui-calendar-react": "^0.15.3",
-    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.5.0",
+    "@semantic-ui-react/craco-less": "^1.1.0",
+    "semantic-ui-less": "^2.4.1"
   }
 }

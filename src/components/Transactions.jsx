@@ -14,8 +14,6 @@ class Transactions extends Component {
             <Icon name="angle double right" className="black"></Icon>
             Recent Activity
           </Header>
-          <Divider hidden></Divider>
-
           <Item.Group>
             {transactions.map((t, index) => (
               <Activity key={index} activity={t}></Activity>

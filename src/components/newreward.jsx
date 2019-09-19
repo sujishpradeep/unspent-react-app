@@ -96,14 +96,15 @@ class NewReward extends Component {
 
     return (
       <React.Fragment>
-        <Header as="h2" textAlign="center">
+        {/* <Header as="h2" textAlign="center">
           <Header.Content>
             <div className="inline">${grossRewards}.00</div>
             <Header.Subheader>
               <div className="inline">Rewards Earned</div>
             </Header.Subheader>
           </Header.Content>
-        </Header>
+        </Header> */}
+
         <Modal
           onClose={this.closeModal}
           open={showModal}
@@ -112,7 +113,7 @@ class NewReward extends Component {
               onClick={this.loadModal}
               circular
               textalign="center"
-              color="orange"
+              color="grey"
               icon="plus"
             ></Button>
           }
@@ -122,6 +123,45 @@ class NewReward extends Component {
 
           <Modal.Content>
             <Form>
+              <Form.Group widths="equal">
+                <Form.Field>
+                  <label>Amount Earned</label>
+                  <Input
+                    labelPosition="right"
+                    type="text"
+                    placeholder="Amount"
+                    onChange={this.handleChange}
+                  >
+                    <Label basic> $</Label>
+                    <Input
+                      onChange={this.handleChange}
+                      name="amount"
+                      pattern="[0-9]*"
+                      type="number"
+                    ></Input>
+                    <Label>.00</Label>
+                  </Input>
+                  {errors.amount && (
+                    <Label pointing color="red" basic>
+                      Amount can't be blank
+                    </Label>
+                  )}
+                </Form.Field>
+
+                <Form.Field>
+                  <DateInput
+                    name="date"
+                    placeholder="Date"
+                    value={this.state.reward.date}
+                    onChange={this.handleChange}
+                    animation="none"
+                    label="Date"
+                    closable
+                    maxDate={this.state.currentDate}
+                    dateFormat="Do MMMM, YYYY"
+                  />
+                </Form.Field>
+              </Form.Group>
               <Form.Group widths="equal">
                 <Form.Field>
                   <label>Unspent Category</label>
@@ -173,49 +213,9 @@ class NewReward extends Component {
                   </Menu>
                   {errors.category && (
                     <Label pointing color="red" basic>
-                      Pick a category
+                      Category can't be blank
                     </Label>
                   )}
-                </Form.Field>
-              </Form.Group>
-
-              <Form.Group widths="equal">
-                <Form.Field>
-                  <label>Reward Amount Earned</label>
-                  <Input
-                    labelPosition="right"
-                    type="text"
-                    placeholder="Amount"
-                    onChange={this.handleChange}
-                  >
-                    <Label basic> $</Label>
-                    <Input
-                      onChange={this.handleChange}
-                      name="amount"
-                      pattern="[0-9]*"
-                      type="number"
-                    ></Input>
-                    <Label>.00</Label>
-                  </Input>
-                  {errors.amount && (
-                    <Label pointing color="red" basic>
-                      Enter any reward amount
-                    </Label>
-                  )}
-                </Form.Field>
-
-                <Form.Field>
-                  <DateInput
-                    name="date"
-                    placeholder="Date"
-                    value={this.state.reward.date}
-                    onChange={this.handleChange}
-                    animation="none"
-                    label="Date"
-                    closable
-                    maxDate={this.state.currentDate}
-                    dateFormat="Do MMMM, YYYY"
-                  />
                 </Form.Field>
               </Form.Group>
 
@@ -224,7 +224,7 @@ class NewReward extends Component {
                   name="notes"
                   id="form-textarea-control-opinion"
                   control={TextArea}
-                  label="Notes"
+                  label="Quick Notes"
                   placeholder={placeholder}
                   onChange={this.handleChange}
                 ></Form.Field>
@@ -255,6 +255,9 @@ class NewReward extends Component {
             </Form>
           </Modal.Content>
         </Modal>
+        <div>
+          <span className="test block">Rewards Earned </span>
+        </div>
       </React.Fragment>
     );
   }

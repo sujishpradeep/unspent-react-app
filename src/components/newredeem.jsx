@@ -16,7 +16,6 @@ import {
 
 import { DateInput } from "semantic-ui-calendar-react";
 import Rewards from "./rewards";
-import { getBoxes } from "../services/accountService";
 
 const Joi = require("joi");
 
@@ -115,14 +114,15 @@ class NewRedeem extends Component {
 
     return (
       <React.Fragment>
-        <Header as="h2" textAlign="center">
+        {/* <Header as="h2" textAlign="center">
           <Header.Content>
             <div className="inline">${grossUsage}.00</div>
             <Header.Subheader>
               <div className="inline">Redeemed</div>
             </Header.Subheader>
           </Header.Content>
-        </Header>
+        </Header> */}
+
         <Modal
           onClose={this.closeModal}
           open={showModal}
@@ -131,24 +131,24 @@ class NewRedeem extends Component {
               onClick={this.loadModal}
               circular
               textalign="center"
-              color="orange"
+              color="grey"
               icon="plus"
             ></Button>
           }
           centered={false}
         >
-          <Modal.Header>Add a new Redemption</Modal.Header>
+          <Modal.Header>Add a new spending</Modal.Header>
 
           <Modal.Content>
             <Form>
               <Form.Field>
                 <Label basic color="black">
-                  Amount Available - {availableAmount}
+                  Rewards Available - {availableAmount}
                 </Label>
               </Form.Field>
               <Form.Group widths="equal">
                 <Form.Field>
-                  <label>New Redemption Amount </label>
+                  <label>New Spent Amount </label>
                   <Input
                     labelPosition="right"
                     type="text"
@@ -169,12 +169,12 @@ class NewRedeem extends Component {
                       `"amount" must be less than or equal`
                     ) && (
                       <Label pointing color="red" basic>
-                        Amount should not exeed available rewards amount
+                        Amount cannot exceed available rewards amount
                       </Label>
                     )) ||
                     (errors.amount && (
                       <Label pointing color="red" basic>
-                        Enter any redeem amount
+                        Amount can't be blank
                       </Label>
                     ))}
                 </Form.Field>
@@ -199,7 +199,7 @@ class NewRedeem extends Component {
 
                   <Menu vertical>
                     <Dropdown
-                      text={box || "Select Redemption Box"}
+                      text={box || "Select the Spent Box"}
                       item
                       onChange={this.handleChange}
                     >
@@ -222,7 +222,7 @@ class NewRedeem extends Component {
 
                   {errors.box && (
                     <Label pointing color="red" basic>
-                      Pick the redeem box
+                      Box can't be blank
                     </Label>
                   )}
                 </Form.Field>
@@ -233,7 +233,7 @@ class NewRedeem extends Component {
                   name="notes"
                   id="form-textarea-control-opinion"
                   control={TextArea}
-                  label="Notes"
+                  label="Quick Notes"
                   placeholder={placeholder}
                   onChange={this.handleChange}
                 ></Form.Field>
@@ -264,6 +264,9 @@ class NewRedeem extends Component {
             </Form>
           </Modal.Content>
         </Modal>
+        <div>
+          <span className="test block">Rewards Spent</span>
+        </div>
       </React.Fragment>
     );
   }

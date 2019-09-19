@@ -5,6 +5,7 @@ import { saveBox } from "../utils/testRedeemBoxes";
 import { getBoxes, updateBoxes } from "../services/accountService";
 import authservice from "../services/authservice";
 import OutsideClickHandler from "react-outside-click-handler";
+var _ = require("lodash");
 
 class Boxes extends Component {
   state = {
@@ -104,6 +105,19 @@ class Boxes extends Component {
             ))}
           </Grid>
         </div>
+        {/* <div
+          style={{
+            position: "relative",
+            top: "100%",
+            transform: "translateY(-50%)",
+            textAlign: "center",
+            margin: "auto"
+          }}
+        >
+          <div className="add-button pointer">
+            <div className="button-text"> + </div>
+          </div>
+        </div> */}
       </React.Fragment>
     );
   }

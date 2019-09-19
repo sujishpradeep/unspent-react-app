@@ -24,22 +24,24 @@ class LandingPage extends Component {
 
             <div className="main-buttons">
               <Button
-                inverted
                 onClick={() => {
                   window.location = "/login";
                 }}
+                color="yellow"
+                basic
+                inverted
               >
-                Login
+                <b className=""> Login</b>
               </Button>
               <div className="pl5 inline"></div>
 
               <Button
-                color="violet"
+                color="yellow"
                 onClick={() => {
                   window.location = "/signup";
                 }}
               >
-                <b>Sign up</b>
+                <div className="primary">Sign up</div>
               </Button>
             </div>
           </div>
@@ -48,26 +50,32 @@ class LandingPage extends Component {
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <div className="banner-text">
-                    <h1>
-                      Unspent lets you track the expenses which you chose not to
-                      make in a rewarding way
-                    </h1>
+                    <div className="banner-header">
+                      Unspent helps you to trim down your expense clutters and
+                      move those to things that you really love to do
+                    </div>
+
                     <br></br>
-                    <p>
+                    <div className="banner-sub-header">
                       Unspent's features helps you to manage your extra expenses
                       smartly, so that you can utilize it wisely based on your
                       prefered choices
-                    </p>
+                    </div>
+                    {/* <p>
+                     
+                    </p> */}
                     <br></br>
-                    <Button
-                      color="green"
-                      size="huge"
-                      onClick={() => {
-                        window.location = "/signup";
-                      }}
-                    >
-                      Sign up and explore!
-                    </Button>
+                    <div style={{ textAlign: "center" }}>
+                      <Button
+                        color="yellow"
+                        size="huge"
+                        onClick={() => {
+                          window.location = "/signup";
+                        }}
+                      >
+                        <div className="primary">Sign up and explore!</div>
+                      </Button>
+                    </div>
                   </div>
                 </Grid.Column>
 

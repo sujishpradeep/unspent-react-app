@@ -193,7 +193,7 @@ class SignUp extends Component {
 
                   <Button
                     type="submit"
-                    color="violet"
+                    color="pink"
                     onClick={event => {
                       this.handleSubmit();
                     }}

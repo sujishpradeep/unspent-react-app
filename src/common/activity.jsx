@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Icon, Divider, Segment, Header } from "semantic-ui-react";
+import { Item, Icon, Divider, Segment, Header, Label } from "semantic-ui-react";
 import Moment from "moment";
 
 class Activity extends Component {
@@ -11,24 +11,32 @@ class Activity extends Component {
     );
 
     const sign = activity.category ? "+" : "-";
+    const color = activity.category ? "blue" : "pink";
     return (
       <Segment>
+        {/* <Divider></Divider> */}
         <Item>
           <Item.Content>
-            <div className="head inline black">
-              {sign} ${activity.amount}.00
-            </div>
+            {/* <Label color={color} horizontal size="large">
+            
+            </Label> */}
+
+            <Label color={color} key={color}>
+              {`${sign} ${activity.amount}.00`}
+            </Label>
+
+            {/* <div className="head inline ">${activity.amount}.00</div> */}
             <span className="ar black">
               {displayDate}
               <Icon name="calendar alternate outline"></Icon>
             </span>
 
             <Item.Meta>
+              {/* <span className="black">{activity.category || activity.box}</span> */}
               <span className="black">{activity.category || activity.box}</span>
             </Item.Meta>
-
             <Item.Description>
-              <p className="grey ow">{activity.notes}</p>
+              <p className=" ow">{activity.notes}</p>
             </Item.Description>
           </Item.Content>
         </Item>

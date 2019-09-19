@@ -27,14 +27,13 @@
   /*  app-color-main: rgb(255, 252, 102);*/
 }
 
-@pink : #FF1493;
-
 html,
 body {
   height: 100%;
 }
 body {
-  background-color: white;
+  --background-color: white;
+  background-image: url("/geometry2.png");
 }
 
 .black {
@@ -74,8 +73,8 @@ body {
   font-weight: 400;
   letter-spacing: 0.5px;
   font-size: 16px;
-  --color: rgb(0, 0, 0);
-  color: black;
+  color: rgb(0, 0, 0);
+  --color: #072448;
   --font-family: "Ubuntu";
 }
 
@@ -100,7 +99,6 @@ body {
 .head {
   display: inline;
   margin: -0.21425em 0 0;
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 18px;
 }
@@ -162,9 +160,10 @@ input:focus {
 .mb10 {
   margin-bottom: 20px;
 }
-.ui.header {
-  margin-top: 0px;
-  margin-bottom: 5px;
+.test {
+  color: black;
+  margin-top: 10px;
+  font-size: 21px;
 }
 
 .ui.items {
@@ -207,8 +206,8 @@ h1 {
 }
 
 #navbar {
-  background: #2962ff;
-  --background: #7a7cff;
+  --background: #2962ff;
+  background: #1f8d86;
   --background: rgb(255, 255, 255);
   --background: rgb(51, 51, 51);
   display: flex;
@@ -231,12 +230,12 @@ h1 {
   color: rgb(255, 255, 255);
   font-family: "Satisfy";
   font-size: 45px;
-  text-shadow: 1px 0px rgb(19, 18, 18);
+  --text-shadow: 1px 0px rgb(19, 18, 18);
 }
 
 .card-header {
   color: rgb(247, 245, 245);
-  font-family: "Manjari";
+  --font-family: "Manjari";
   font-size: 28px;
 }
 
@@ -451,7 +450,7 @@ textarea {
   appearance: textfield;
   border: 0px solid rgb(238, 236, 236);
   outline: none;
-  background: white;
+  background: #fce7c0;
 }
 textarea:focus {
   outline: none !important;
@@ -491,13 +490,15 @@ textarea {
 }
 
 .thickborder {
-  border-radius: 10px;
-  box-shadow: 0px 0px 5px #999;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgb(160, 160, 160);
   --background: transparent;
-  background: rgb(255, 255, 255);
+  --background: rgb(255, 255, 255);
+  --background-image: orange;
   padding: 5px;
+  background: rgb(255, 203, 105);
 
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   --border: solid 1px #2d2d2d;
 }
 
@@ -508,7 +509,8 @@ textarea {
 .box-money {
   height: 25px;
 
-  background: #2962ff;
+  --background: #2962ff;
+  background: #f8aa4b;
   --background: #b688ff;
   --box-shadow: 0px 0px 2px #2d2d2d;
   box-shadow: 0px 0px 5px #999;
@@ -536,19 +538,23 @@ textarea {
   position: absolute;
 
   margin-left: 8vh;
-  margin-top: 8vh;
+  margin-top: 7vh;
   width: 60px;
   height: 60px;
-  --background-color: #ffee58;
-  background-color: #ec407a;
+  --background-color: #072448;
+  --background-color: #ec407a;
+  background: #4049ae;
   color: rgb(0, 0, 0);
   border-radius: 50px;
   text-align: center;
-  box-shadow: 2px 2px 3px #999;
+  box-shadow: 0px 0px 2px #999;
 }
 
 .button-text {
-  margin-top: 20px;
   font-size: 50px;
-  color: #ffffff;
+  color: #fff;
+}
+
+.secondary {
+  color: rgb(69, 121, 76);
 }

@@ -84,7 +84,6 @@ class NavBar extends Component {
                   icon="align justify"
                   basic
                   inverted
-                  color="white"
                   className="mt5"
                 ></Button>
               </div>
@@ -115,8 +114,8 @@ class NavBar extends Component {
                 to="/rewards"
                 active={activeItem === "rewards"}
               >
-                <Icon name="exchange" />
-                <div className={isMobile ? "black" : "black"}>Activity</div>
+                <Icon name="user" />
+                <div className={isMobile ? "black" : "black"}>Rewards</div>
               </Menu.Item>
 
               <Menu.Item as={Link} onClick={this.handleBookClick} to="/boxes">
@@ -125,8 +124,8 @@ class NavBar extends Component {
               </Menu.Item>
 
               <Menu.Item as={Link} to="/user" onClick={this.handleBookClick}>
-                <Icon name="user" />
-                <div className={isMobile ? "black" : "black"}>User</div>
+                <Icon name="exchange" />
+                <div className={isMobile ? "black" : "black"}>Activity</div>
               </Menu.Item>
 
               <Menu.Item as={Link} to="/logout" onClick={this.handleBookClick}>
@@ -150,7 +149,12 @@ class NavBar extends Component {
                 <Route
                   path="/user"
                   render={props => (
-                    <User {...props} fullname={this.props.fullname} />
+                    <User
+                      {...props}
+                      fullname={this.props.fullname}
+                      rewards={this.props.rewards}
+                      redeems={this.props.redeems}
+                    />
                   )}
                 />
 

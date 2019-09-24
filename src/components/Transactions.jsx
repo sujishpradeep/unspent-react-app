@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Item, Icon, Divider, Segment, Header } from "semantic-ui-react";
-import Activity from "../common/activity";
+import RecentActivity from "../common/recentactivity";
 
 class Transactions extends Component {
   state = {};
@@ -10,13 +10,13 @@ class Transactions extends Component {
     return (
       <React.Fragment>
         <Segment raised>
-          <Header as="h3" color="black">
-            <Icon name="angle double right" className="black"></Icon>
+          <Header as="h3" color="teal">
+            <Icon name="angle double right" color="teal"></Icon>
             Recent Activity
           </Header>
           <Item.Group>
             {transactions.map((t, index) => (
-              <Activity key={index} activity={t}></Activity>
+              <RecentActivity key={index} activity={t}></RecentActivity>
             ))}
           </Item.Group>
         </Segment>

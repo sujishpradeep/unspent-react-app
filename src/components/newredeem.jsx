@@ -131,7 +131,8 @@ class NewRedeem extends Component {
               onClick={this.loadModal}
               circular
               textalign="center"
-              color="grey"
+              color="black"
+              basic
               icon="plus"
             ></Button>
           }
@@ -155,14 +156,13 @@ class NewRedeem extends Component {
                     placeholder="Amount"
                     onChange={this.handleChange}
                   >
-                    <Label basic> $</Label>
                     <Input
                       onChange={this.handleChange}
                       name="amount"
                       pattern="[0-9]*"
                       type="number"
                     ></Input>
-                    <Label>.00</Label>
+                    <Label basic>.00</Label>
                   </Input>
                   {(errors.amount &&
                     errors.amount.startsWith(
@@ -195,30 +195,29 @@ class NewRedeem extends Component {
               </Form.Group>
               <Form.Group widths="equal">
                 <Form.Field>
-                  <label>Used for</label>
+                  <label>Redeem box </label>
 
-                  <Menu vertical>
-                    <Dropdown
-                      text={box || "Select the Spent Box"}
-                      item
-                      onChange={this.handleChange}
-                    >
-                      <Dropdown.Menu>
-                        {baskets.map(
-                          (d, index) =>
-                            d.name && (
-                              <Dropdown.Item
-                                text={d.name}
-                                name="box"
-                                key={index}
-                                value={d.name}
-                                onClick={this.handleChange}
-                              />
-                            )
-                        )}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Menu>
+                  <Dropdown
+                    text={box || "Select the Redeem Box"}
+                    selection
+                    onChange={this.handleChange}
+                    fluid
+                  >
+                    <Dropdown.Menu fluid>
+                      {baskets.map(
+                        (d, index) =>
+                          d.name && (
+                            <Dropdown.Item
+                              text={d.name}
+                              name="box"
+                              key={index}
+                              value={d.name}
+                              onClick={this.handleChange}
+                            />
+                          )
+                      )}
+                    </Dropdown.Menu>
+                  </Dropdown>
 
                   {errors.box && (
                     <Label pointing color="red" basic>

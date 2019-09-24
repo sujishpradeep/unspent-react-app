@@ -113,8 +113,9 @@ class NewReward extends Component {
               onClick={this.loadModal}
               circular
               textalign="center"
-              color="grey"
+              basic
               icon="plus"
+              color="black"
             ></Button>
           }
           centered={false}
@@ -132,14 +133,13 @@ class NewReward extends Component {
                     placeholder="Amount"
                     onChange={this.handleChange}
                   >
-                    <Label basic> $</Label>
                     <Input
                       onChange={this.handleChange}
                       name="amount"
                       pattern="[0-9]*"
                       type="number"
                     ></Input>
-                    <Label>.00</Label>
+                    <Label basic>.00</Label>
                   </Input>
                   {errors.amount && (
                     <Label pointing color="red" basic>

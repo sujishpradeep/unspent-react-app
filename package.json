@@ -5,6 +5,7 @@
   "dependencies": {
     "@semantic-ui-react/bootstrap": "^1.1.0",
     "axios": "^0.19.0",
+    "currency-codes": "^1.5.0",
     "font-awesome": "^4.7.0",
     "joi": "^14.3.1",
     "jwt-decode": "^2.2.0",

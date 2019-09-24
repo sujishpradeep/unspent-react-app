@@ -91,7 +91,7 @@ class Boxes extends Component {
         <div style={styles}>
           <Grid columns={2}>
             {boxes.map(b => (
-              <Grid.Column style={{ height: "30vh" }}>
+              <Grid.Column style={{ height: "27vh" }}>
                 <AddBasket
                   key={b._id}
                   basket={b}

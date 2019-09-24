@@ -30,18 +30,14 @@
 html,
 body {
   height: 100%;
-}
-body {
-  --background-color: white;
-  background-image: url("/geometry2.png");
+  background-color: white;
 }
 
 .black {
-  color: #000000;
-  letter-spacing: 1px;
+  color: #1b1c1d;
 }
 .grey {
-  color: rgba(102, 99, 99, 0.6);
+  color: #767676;
 }
 
 .green {
@@ -67,20 +63,20 @@ body {
   height: auto;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+@import url("https://fonts.googleapis.com/css?family=Chilanka");
 
 .big-font {
-  font-weight: 400;
+  font-weight: 550;
   letter-spacing: 0.5px;
-  font-size: 16px;
-  color: rgb(0, 0, 0);
+  font-size: 18px;
+  color: rgb(26, 26, 26);
   --color: #072448;
-  --font-family: "Ubuntu";
+  font-family: "Chilanka";
 }
 
 .ar {
   float: right;
-  color: #2d2d2d;
+  color: #1b1c1d;
 }
 
 .ac {
@@ -98,8 +94,8 @@ body {
 
 .head {
   display: inline;
-  margin: -0.21425em 0 0;
-  font-weight: 700;
+  --margin: -0.21425em 0 0;
+  font-weight: 400;
   font-size: 18px;
 }
 
@@ -161,7 +157,7 @@ input:focus {
   margin-bottom: 20px;
 }
 .test {
-  color: black;
+  color: #1b1c1d;
   margin-top: 10px;
   font-size: 21px;
 }
@@ -450,7 +446,8 @@ textarea {
   appearance: textfield;
   border: 0px solid rgb(238, 236, 236);
   outline: none;
-  background: #fce7c0;
+  padding: 5px;
+  background-image: url("/food.png");
 }
 textarea:focus {
   outline: none !important;
@@ -494,9 +491,10 @@ textarea {
   box-shadow: 2px 2px 2px rgb(160, 160, 160);
   --background: transparent;
   --background: rgb(255, 255, 255);
-  --background-image: orange;
-  padding: 5px;
-  background: rgb(255, 203, 105);
+  background-image: url("/food.png");
+  --padding: 5px;
+  --background: rgb(255, 203, 105);
+  font-family: "Chilanka", cursive;
 
   color: rgb(255, 255, 255);
   --border: solid 1px #2d2d2d;
@@ -557,4 +555,34 @@ textarea {
 
 .secondary {
   color: rgb(69, 121, 76);
+}
+
+.activityheader {
+  font-size: 2vh;
+}
+
+.activitysubheader {
+  font-size: 3.5vh;
+  font-weight: 500;
+  padding-left: 15px;
+  margin: 0;
+}
+
+.plus {
+  font-size: 10px;
+}
+
+.activity-span {
+  font-size: 16px;
+}
+
+.activitynotes {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.activity-amount {
+  font-size: 2.3vh;
+  vertical-align: "middle";
+  /* font-weight: bold; */
 }

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Header, Divider, Segment, Button, Icon } from "semantic-ui-react";
+import { Header, Divider } from "semantic-ui-react";
 import Unspend from "./unspend";
-import Balance from "./Balance";
+
 import Transactions from "./Transactions";
-import { saveItem, getItems } from "../utils/testUnspentService";
+
 import Moment from "moment";
-import Activity from "../common/activity";
+
 import { getAccount, addRedeem, addReward } from "../services/accountService";
 import authservice from "../services/authservice";
 

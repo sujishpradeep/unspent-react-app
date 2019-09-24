@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { Route } from "react-router-dom";
 
 import Rewards from "./rewards";
-import unspent from "../unspent.png";
-import User from "./user";
+
+import Activities from "./activities";
 import Boxes from "./boxes";
-import Activity from "../common/activity";
-import Logout from "../login/logout";
 import { Button } from "semantic-ui-react";
 import { Icon } from "semantic-ui-react";
 import { Sidebar } from "semantic-ui-react";
 import { Menu } from "semantic-ui-react";
+import Profile from "./profile";
 
 class NavBar extends Component {
   state = { visible: false, counter: false };
@@ -107,6 +106,7 @@ class NavBar extends Component {
               vertical
               visible={visible}
               width="thin"
+              // onHide={this.setState({ visible: false })}
             >
               <Menu.Item
                 as={Link}
@@ -114,7 +114,7 @@ class NavBar extends Component {
                 to="/rewards"
                 active={activeItem === "rewards"}
               >
-                <Icon name="user" />
+                <Icon name="tags" />
                 <div className={isMobile ? "black" : "black"}>Rewards</div>
               </Menu.Item>
 
@@ -123,14 +123,18 @@ class NavBar extends Component {
                 <div className={isMobile ? "black" : "black"}>Redeem Boxes</div>
               </Menu.Item>
 
-              <Menu.Item as={Link} to="/user" onClick={this.handleBookClick}>
+              <Menu.Item
+                as={Link}
+                to="/activity"
+                onClick={this.handleBookClick}
+              >
                 <Icon name="exchange" />
                 <div className={isMobile ? "black" : "black"}>Activity</div>
               </Menu.Item>
 
-              <Menu.Item as={Link} to="/logout" onClick={this.handleBookClick}>
-                <Icon name="power off" />
-                <div className={isMobile ? "black" : "black"}>Sign out</div>
+              <Menu.Item as={Link} to="/profile" onClick={this.handleBookClick}>
+                <Icon name="user" />
+                <div className={isMobile ? "black" : "black"}>Profile</div>
               </Menu.Item>
             </Sidebar>
 
@@ -147,9 +151,9 @@ class NavBar extends Component {
                   )}
                 />
                 <Route
-                  path="/user"
+                  path="/activity"
                   render={props => (
-                    <User
+                    <Activities
                       {...props}
                       fullname={this.props.fullname}
                       rewards={this.props.rewards}
@@ -158,7 +162,7 @@ class NavBar extends Component {
                   )}
                 />
 
-                <Route path="/logout" component={Logout} />
+                <Route path="/profile" component={Profile} />
                 <Route path="/" exact component={Rewards} />
               </div>
             </Sidebar.Pusher>

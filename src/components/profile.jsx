@@ -71,23 +71,30 @@ class Profile extends Component {
             <Segment raised secondary>
               <div
                 className="satisfy-font"
-                style={{ fontSize: "40px", color: "black" }}
+                style={{ fontSize: "40px", color: "#00817b" }}
               >
                 #Unspent
               </div>
+            </Segment>
+          </Grid>
+
+          <Divider hidden></Divider>
+          <Divider hidden></Divider>
+          <Divider hidden></Divider>
+
+          <Grid centered>
+            <Segment secondary>
               <div
                 style={{
                   color: "#424242",
                   fontSize: "18px",
-                  padding: "5px 0 0 0px",
+                  padding: "2px 0 0 0px",
                   fontWeight: "bold"
                 }}
               >
                 Login Account
               </div>
-              <Segment secondary>
-                <div style={{ color: "#2D2d2d" }}>{this.state.email}</div>
-              </Segment>
+              <div style={{ color: "#2D2d2d" }}>{this.state.email}</div>
             </Segment>
           </Grid>
 
@@ -125,7 +132,7 @@ class Profile extends Component {
                     <Modal.Content>
                       <h5>
                         Refreshing your account allows you to remove all
-                        activities from your account and start over afresh.
+                        activities from your account and start afresh.
                       </h5>
                       <h5>Click "Confirm" to Refresh Your Account</h5>
                       <Modal.Actions>

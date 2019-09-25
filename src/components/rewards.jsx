@@ -8,9 +8,10 @@ import Moment from "moment";
 
 import { getAccount, addRedeem, addReward } from "../services/accountService";
 import authservice from "../services/authservice";
+import ReactLoading from "react-loading";
 
 class Rewards extends Component {
-  state = { redeems: [], rewards: [], id: "", baskets: [] };
+  state = { redeems: [], rewards: [], id: "", baskets: [], isLoading: true };
 
   handleRewardSubmit = async reward => {
     let rewards = [...this.state.rewards];
@@ -66,7 +67,7 @@ class Rewards extends Component {
       name: d
     }));
 
-    this.setState({ rewards, redeems, id, baskets });
+    this.setState({ rewards, redeems, id, baskets, isLoading: false });
   }
 
   getAmounts(rewards, redeems) {
@@ -94,7 +95,19 @@ class Rewards extends Component {
   }
 
   render() {
-    const { rewards, redeems, baskets } = this.state;
+    const { rewards, redeems, baskets, isLoading } = this.state;
+
+    if (isLoading)
+      return (
+        <div>
+          <ReactLoading
+            type={"spinningBubbles"}
+            color={"#00817b"}
+            height={"20%"}
+            width={"20%"}
+          />
+        </div>
+      );
     console.log("Render Rewards", baskets);
     const { grossRewards, grossUsage, availableAmount } = this.getAmounts(
       rewards,

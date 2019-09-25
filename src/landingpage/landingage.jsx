@@ -256,7 +256,7 @@ class LandingPage extends Component {
                         <Comment.Text>
                           {` 
                           Elliot thinks he is overspending on his
-                          home furnishings. He opts to wait for the best deals and invest the unspent money in his retirement
+                          home furnishings. He opts to wait for the best deals and move the unspent money to his investment
                           account! `}
                           <Icon name="chart line" color="green"></Icon>
                         </Comment.Text>

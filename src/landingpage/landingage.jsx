@@ -185,7 +185,9 @@ class LandingPage extends Component {
                     // color: "#ff4081"
                   }}
                 >
-                  #Happy Spendings with #Unspent..! <br></br>
+                  <Icon name="quote left"></Icon> #Unspent Stories..!{" "}
+                  <Icon name="quote right"></Icon>
+                  <br></br>
                   {/* <div className="inline" style={{ fontFamily: "Open Sans" }}>
                 stories!
               </div> */}
@@ -218,7 +220,7 @@ class LandingPage extends Component {
                           Matt skipped his Wednesday Evening Pizza parties for a
                           month and went on an exciting road trip using his
                           Unspent Money! `}
-                          <Icon name="motorcycle" color="grey"></Icon>
+                          <Icon name="hand peace " color="yellow"></Icon>
                         </Comment.Text>
                       </Comment.Content>
                     </Comment>
@@ -256,7 +258,7 @@ class LandingPage extends Component {
                           Elliot thinks he is overspending on his
                           home furnishings. He opts to wait for the best deals and invest the unspent money in his retirement
                           account! `}
-                          <Icon name="chart line" color="brown"></Icon>
+                          <Icon name="chart line" color="green"></Icon>
                         </Comment.Text>
                       </Comment.Content>
                     </Comment>
@@ -271,7 +273,7 @@ class LandingPage extends Component {
               className="steps-tiny"
               style={{ fontSize: "18px", color: "red", padding: "5px" }}
             >
-              Join the Smart and Happy Spenders!
+              Join the World's Smart and Happy Spenders!
             </div>
             <div className="steps-footer-header">
               Start using <div className="satisfy inline"> #Unspent </div> today

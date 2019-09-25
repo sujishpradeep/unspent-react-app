@@ -8,16 +8,18 @@ import {
   Dropdown,
   TextArea,
   Label,
-  Header,
+  Icon,
   Segment,
-  Menu,
+  List,
   Message
 } from "semantic-ui-react";
 
 import { DateInput } from "semantic-ui-calendar-react";
-import Rewards from "./rewards";
+
+import Moment from "moment";
 
 const Joi = require("joi");
+var _ = require("lodash");
 
 class NewRedeem extends Component {
   state = {
@@ -39,6 +41,15 @@ class NewRedeem extends Component {
     if (error) {
       const errors = {};
       for (let item of error.details) errors[item.path[0]] = item.message;
+
+      const formattedDate = Moment(
+        this.state.redeem.date,
+        "Do MMM, YYYY"
+      ).format("YYYY-MM-DD");
+
+      if (!Moment(formattedDate, "YYYY-MM-DD", true).isValid()) {
+        errors.date = "Invalid date";
+      }
       this.setState({ errors });
       return;
     }
@@ -111,6 +122,7 @@ class NewRedeem extends Component {
     console.log("errors", errors);
 
     const { grossUsage } = this.props;
+    const disabled = availableAmount === 0 || _.isEmpty(baskets);
 
     return (
       <React.Fragment>
@@ -137,19 +149,55 @@ class NewRedeem extends Component {
             ></Button>
           }
           centered={false}
+          closeIcon
         >
-          <Modal.Header>Add a new spending</Modal.Header>
+          <Modal.Header>Redeem My Rewards</Modal.Header>
 
           <Modal.Content>
             <Form>
               <Form.Field>
-                <Label basic color="black">
-                  Rewards Available - {availableAmount}
-                </Label>
+                <Segment compact>
+                  {disabled && (
+                    <List>
+                      {availableAmount === 0 && (
+                        <List.Item>
+                          <List.Icon name="dont" color="orange" />
+                          <List.Content>
+                            <List.Header as="a">
+                              No Rewards available now for Redemption.
+                            </List.Header>
+                          </List.Content>
+                        </List.Item>
+                      )}
+                      {_.isEmpty(baskets) && (
+                        <List.Item>
+                          <List.Icon name="dont" color="orange" />
+                          <List.Content>
+                            <List.Header as="a">
+                              Redeem boxes are empty
+                            </List.Header>
+                          </List.Content>
+                        </List.Item>
+                      )}
+                    </List>
+                  )}
+                  {availableAmount !== 0 && (
+                    <List>
+                      <List.Item>
+                        <List.Icon name="checkmark" color="green" />
+                        <List.Content>
+                          <List.Header as="a">
+                            Rewards Available - {availableAmount}.00
+                          </List.Header>
+                        </List.Content>
+                      </List.Item>
+                    </List>
+                  )}
+                </Segment>
               </Form.Field>
               <Form.Group widths="equal">
-                <Form.Field>
-                  <label>New Spent Amount </label>
+                <Form.Field disabled={disabled}>
+                  <label>Redeem Amount </label>
                   <Input
                     labelPosition="right"
                     type="text"
@@ -168,12 +216,12 @@ class NewRedeem extends Component {
                     errors.amount.startsWith(
                       `"amount" must be less than or equal`
                     ) && (
-                      <Label pointing color="red" basic>
+                      <Label pointing color="grey" basic>
                         Amount cannot exceed available rewards amount
                       </Label>
                     )) ||
                     (errors.amount && (
-                      <Label pointing color="red" basic>
+                      <Label pointing color="grey" basic>
                         Amount can't be blank
                       </Label>
                     ))}
@@ -190,11 +238,17 @@ class NewRedeem extends Component {
                     closable
                     maxDate={this.state.currentDate}
                     dateFormat="Do MMMM, YYYY"
+                    disabled={disabled}
                   />
+                  {errors.date && (
+                    <Label pointing color="grey" basic>
+                      Invalid Date
+                    </Label>
+                  )}
                 </Form.Field>
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Field>
+                <Form.Field disabled={disabled}>
                   <label>Redeem box </label>
 
                   <Dropdown
@@ -202,6 +256,7 @@ class NewRedeem extends Component {
                     selection
                     onChange={this.handleChange}
                     fluid
+                    disabled={disabled}
                   >
                     <Dropdown.Menu fluid>
                       {baskets.map(
@@ -220,7 +275,7 @@ class NewRedeem extends Component {
                   </Dropdown>
 
                   {errors.box && (
-                    <Label pointing color="red" basic>
+                    <Label pointing color="grey" basic>
                       Box can't be blank
                     </Label>
                   )}
@@ -229,6 +284,7 @@ class NewRedeem extends Component {
 
               <Form.Group widths="equal">
                 <Form.Field
+                  disabled={disabled}
                   name="notes"
                   id="form-textarea-control-opinion"
                   control={TextArea}
@@ -240,31 +296,33 @@ class NewRedeem extends Component {
 
               <Segment.Inline>
                 <Button
-                  basic
-                  color="black"
+                  color="teal"
+                  size="large"
+                  circular
                   onClick={event => {
                     this.handleSubmit();
                   }}
+                  disabled={disabled}
                 >
-                  Done
+                  <Icon name="checkmark"></Icon>Done
                 </Button>
-                <Button
+                {/* <Button
                   content="Cancel"
                   floated="right"
                   basic
-                  color="black"
+                  color="grey"
                   onClick={() =>
                     this.setState({
                       showModal: false
                     })
                   }
-                />
+                /> */}
               </Segment.Inline>
             </Form>
           </Modal.Content>
         </Modal>
         <div>
-          <span className="test block">Rewards Spent</span>
+          <span className="test block">Redeem Rewards</span>
         </div>
       </React.Fragment>
     );

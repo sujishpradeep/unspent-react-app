@@ -4,7 +4,7 @@ import AddBasket from "../common/addbasket";
 import { saveBox } from "../utils/testRedeemBoxes";
 import { getBoxes, updateBoxes } from "../services/accountService";
 import authservice from "../services/authservice";
-import OutsideClickHandler from "react-outside-click-handler";
+
 var _ = require("lodash");
 
 class Boxes extends Component {

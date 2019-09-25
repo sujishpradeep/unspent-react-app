@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Header, Item, Menu, Segment } from "semantic-ui-react";
+import { Grid, Header, Item, Menu, Segment, Divider } from "semantic-ui-react";
 import ActivityCard from "./activitycard";
+import Rewards from "./rewards";
 var _ = require("lodash");
 
 class Activities extends Component {
@@ -33,39 +34,64 @@ class Activities extends Component {
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="Rewards Spent"
-              active={activeItem === "Rewards Spent"}
+              name="Rewards Redeemed"
+              active={activeItem === "Rewards Redeemed"}
               onClick={this.handleItemClick}
               textAlign="right"
             />
           </Menu>
-          <Grid></Grid>
 
           {activeItem === "Rewards Earned" && (
-            <Grid columns={2} centered>
-              {Object.keys(sortedRewards).map(k => (
-                <Grid.Column>
-                  <ActivityCard
-                    key={k}
-                    activities={sortedRewards[k]}
-                    type={k}
-                  ></ActivityCard>
-                </Grid.Column>
-              ))}
-            </Grid>
+            <div>
+              <Grid columns={2} centered>
+                {Object.keys(sortedRewards).map(k => (
+                  <Grid.Column>
+                    <ActivityCard
+                      key={k}
+                      activities={sortedRewards[k]}
+                      type={k}
+                    ></ActivityCard>
+                  </Grid.Column>
+                ))}
+              </Grid>
+              {_.isEmpty(sortedRewards) && (
+                <div>
+                  <br></br>
+                  <Segment>
+                    <div> You are yet to earn your first Rewards! </div>
+                  </Segment>
+                </div>
+              )}
+            </div>
           )}
-          {activeItem === "Rewards Spent" && (
-            <Grid columns={2} centered>
-              {Object.keys(sortedRedeems).map(k => (
-                <Grid.Column>
-                  <ActivityCard
-                    key={k}
-                    activities={sortedRedeems[k]}
-                    type={k}
-                  ></ActivityCard>
-                </Grid.Column>
-              ))}
-            </Grid>
+          {activeItem === "Rewards Redeemed" && (
+            <div>
+              <Grid columns={2} centered>
+                {Object.keys(sortedRedeems).map(k => (
+                  <Grid.Column>
+                    <ActivityCard
+                      key={k}
+                      activities={sortedRedeems[k]}
+                      type={k}
+                    ></ActivityCard>
+                  </Grid.Column>
+                ))}
+              </Grid>
+              {_.isEmpty(sortedRedeems) && (
+                <div>
+                  <br></br>
+                  <Segment>
+                    {_.isEmpty(sortedRewards) && (
+                      <div> You are yet to earn your first Rewards! </div>
+                    )}
+
+                    {!_.isEmpty(sortedRewards) && (
+                      <div> You are yet to redeem your Rewards! </div>
+                    )}
+                  </Segment>
+                </div>
+              )}
+            </div>
           )}
         </Segment>
       </React.Fragment>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Segment, Modal, Item, Icon, Grid } from "semantic-ui-react";
 
 import Moment from "moment";
+import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
 
 class ActivityCard extends Component {
   state = {};
@@ -23,14 +24,14 @@ class ActivityCard extends Component {
     console.log("Activities", activities);
     const total = activities.reduce((a, b) => +a + +b.amount, 0);
 
-    const color = activities[0].category ? "blue" : "pink";
+    const icon = activities[0].category ? "tags" : "check square";
 
     return (
       <Modal
         onClose={this.closeModal}
         open={showModal}
         trigger={
-          <Segment onClick={this.loadModal}>
+          <Segment onClick={this.loadModal} className="pointer">
             <Icon name="chevron circle right" color="teal"></Icon>
             {/* <Icon name="play circle" color="teal"></Icon> */}
             <div className="activityheader black inline">{type}</div>
@@ -40,14 +41,17 @@ class ActivityCard extends Component {
         }
         closeIcon
         centered={false}
+        size="mini"
       >
-        <Header color="teal"> {type}</Header>
+        <Header> All Activities - {type}</Header>
+
         <Modal.Content scrolling>
           {activities.map(a => (
             <Segment>
               <Item>
                 <Item.Content>
-                  -{a.amount}.00
+                  <Icon name={icon} color="grey"></Icon>
+                  {a.amount}.00
                   <span className="ar black">
                     {Moment(a.date, "YYYY-MM-DD").format("Do MMM, YYYY")}
                   </span>

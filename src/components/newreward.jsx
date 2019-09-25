@@ -8,11 +8,12 @@ import {
   Dropdown,
   TextArea,
   Label,
-  Header,
+  Icon,
   Segment,
   Menu,
   Message
 } from "semantic-ui-react";
+import Moment from "moment";
 
 import { DateInput } from "semantic-ui-calendar-react";
 const Joi = require("joi");
@@ -35,6 +36,19 @@ class NewReward extends Component {
     if (error) {
       const errors = {};
       for (let item of error.details) errors[item.path[0]] = item.message;
+      // const formattedDate = Moment(reward.date, "Do MMM, YYYY").format(
+      //   "YYYY-MM-DD"
+      // );
+
+      const formattedDate = Moment(
+        this.state.reward.date,
+        "Do MMM, YYYY"
+      ).format("YYYY-MM-DD");
+
+      if (!Moment(formattedDate, "YYYY-MM-DD", true).isValid()) {
+        errors.date = "Invalid date";
+      }
+      // var date = moment("2016-10-19", "DD-MM-YYYY", true);
       this.setState({ errors: errors });
       return;
     }
@@ -119,8 +133,9 @@ class NewReward extends Component {
             ></Button>
           }
           centered={false}
+          closeIcon
         >
-          <Modal.Header>Add a new reward</Modal.Header>
+          <Modal.Header>Add a New Reward</Modal.Header>
 
           <Modal.Content>
             <Form>
@@ -142,7 +157,7 @@ class NewReward extends Component {
                     <Label basic>.00</Label>
                   </Input>
                   {errors.amount && (
-                    <Label pointing color="red" basic>
+                    <Label pointing color="grey" basic>
                       Amount can't be blank
                     </Label>
                   )}
@@ -160,6 +175,11 @@ class NewReward extends Component {
                     maxDate={this.state.currentDate}
                     dateFormat="Do MMMM, YYYY"
                   />
+                  {errors.date && (
+                    <Label pointing color="grey" basic>
+                      Invalid Date
+                    </Label>
+                  )}
                 </Form.Field>
               </Form.Group>
               <Form.Group widths="equal">
@@ -202,17 +222,17 @@ class NewReward extends Component {
                           onClick={this.handleChange}
                         />
                         <Dropdown.Item
-                          icon="money"
-                          text="Other Spendings"
+                          icon="money bill alternate outline"
+                          text="Miscellaneous"
                           name="category"
-                          value="Other Spendings"
+                          value="Miscellaneous"
                           onClick={this.handleChange}
                         />
                       </Dropdown.Menu>
                     </Dropdown>
                   </Menu>
                   {errors.category && (
-                    <Label pointing color="red" basic>
+                    <Label pointing color="grey" basic>
                       Category can't be blank
                     </Label>
                   )}
@@ -232,31 +252,32 @@ class NewReward extends Component {
 
               <Segment.Inline>
                 <Button
-                  basic
-                  color="black"
+                  color="teal"
+                  size="large"
+                  circular
                   onClick={event => {
                     this.handleSubmit();
                   }}
                 >
-                  Done
+                  <Icon name="checkmark"></Icon>Done
                 </Button>
-                <Button
+                {/* <Button
                   content="Cancel"
                   floated="right"
                   basic
-                  color="black"
+                  color="grey"
                   onClick={() =>
                     this.setState({
                       showModal: false
                     })
                   }
-                />
+                /> */}
               </Segment.Inline>
             </Form>
           </Modal.Content>
         </Modal>
         <div>
-          <span className="test block">Rewards Earned </span>
+          <span className="test block">Add Rewards </span>
         </div>
       </React.Fragment>
     );

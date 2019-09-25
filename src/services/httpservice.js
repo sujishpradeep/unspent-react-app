@@ -1,8 +1,8 @@
 import axios from "axios";
 
-function setJwt(jwt, type) {
+function setJwt(jwt, gtoken) {
   axios.defaults.headers.common["x-auth-token"] = jwt;
-  axios.defaults.headers.common["x-auth-type"] = type;
+  axios.defaults.headers.common["x-auth-gtoken"] = gtoken;
 }
 
 export default {

@@ -5,7 +5,7 @@
   --banner-underline: #924e0d;
   --banner-outer: #f1ead6;
 
-  --pt-black: #2d2d2d;
+  --pt-black: #424242;
   --pt-grey: #8faeb4;
   --pt-grey-2: #0a4d5a;
   --ac-green-1: #52c88c;
@@ -447,7 +447,7 @@ textarea {
   border: 0px solid rgb(238, 236, 236);
   outline: none;
   padding: 5px;
-  background-image: url("/food.png");
+  background: #ffffff;
 }
 textarea:focus {
   outline: none !important;
@@ -488,13 +488,27 @@ textarea {
 
 .thickborder {
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgb(160, 160, 160);
+  --box-shadow: 0px 0px 4px rgb(160, 160, 160);
   --background: transparent;
   --background: rgb(255, 255, 255);
-  background-image: url("/food.png");
-  --padding: 5px;
-  --background: rgb(255, 203, 105);
+  --background-image: url("/food.png");
+  padding: 5px;
+  background: #ffffff;
   font-family: "Chilanka", cursive;
+  border-top-color: rgba(34, 36, 38, 0.15);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: rgba(34, 36, 38, 0.15);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: rgba(34, 36, 38, 0.15);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: rgba(34, 36, 38, 0.15);
+  border-left-style: solid;
+  border-left-width: 1px;
+  box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12),
+    0px 2px 10px 0px rgba(34, 36, 38, 0.15);
 
   color: rgb(255, 255, 255);
   --border: solid 1px #2d2d2d;
@@ -508,7 +522,7 @@ textarea {
   height: 25px;
 
   --background: #2962ff;
-  background: #f8aa4b;
+
   --background: #b688ff;
   --box-shadow: 0px 0px 2px #2d2d2d;
   box-shadow: 0px 0px 5px #999;
@@ -585,4 +599,8 @@ textarea {
   font-size: 2.3vh;
   vertical-align: "middle";
   /* font-weight: bold; */
+}
+
+.teal {
+  color: #00817b;
 }

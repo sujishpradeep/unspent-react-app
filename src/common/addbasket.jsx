@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Label, Segment, Button, Icon } from "semantic-ui-react";
+import { Modal, Button, Icon, Container } from "semantic-ui-react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { pattern } from "../box-images/pattern.png";
 //import { colo } from "/colo.png";
@@ -19,6 +19,10 @@ class AddBasket extends Component {
     this.setState({ basketNew });
   };
 
+  onClickInfo = () => {
+    console.log("on Click Infp");
+  };
+
   render() {
     let { updateBasket, onEditClick, edit, basket } = this.props;
 
@@ -26,62 +30,81 @@ class AddBasket extends Component {
 
     const secondary = !edit && !basket.name;
     const color = secondary ? "#FFFFFf" : "#FFFFFf";
-    const background = secondary ? "#e6fcf0" : "#e6fcf0";
+
     const buttonmargin = this.props.isMobile ? "16px" : "17px";
     const tertiary = !edit || (edit && basket.name);
 
     return (
-      <div>
-        {/* {secondary && (
-          <div
-            style={{
-              position: "relative",
-              top: "100%",
-              transform: "translateY(-50%)",
-              textAlign: "center",
-              margin: "auto"
-            }}
+      <React.Fragment>
+        {basket.name && (
+          <Modal
+            trigger={
+              <div
+                className="thickborder  segmentinlinebox pointer"
+                onClick={event => {
+                  this.initialEdit();
+                  onEditClick(basket._id);
+                }}
+                style={{
+                  height: "20vh",
+                  padding: " 0 2.5px",
+                  textAlign: "center"
+                }}
+              >
+                <div
+                  style={{
+                    position: "relative",
+                    top: "50%",
+                    transform: "translateY(-50%)"
+                  }}
+                >
+                  {basket.name && (
+                    <p className={`ow big-font ${color}`}>
+                      {basket.name || "Add a new box"}
+                    </p>
+                  )}
+                </div>
+              </div>
+            }
+            closeIcon
+            size="mini"
+            // dimmer="blurring"
+            centered={false}
           >
-            <div
-              className="add-button pointer"
-              onClick={event => {
-                this.initialEdit();
-                onEditClick(basket._id);
-              }}
-            >
-              <div className="button-text"> + </div>
-            </div>
-          </div>
-        )} */}
-        <React.Fragment>
-          {/* <div className="box-money ">
-              <b>$250.00 </b>
-            </div> */}
+            <Modal.Content>
+              <div style={{ textAlign: "center", fontSize: "25px" }}>
+                {basket.name}
+              </div>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button
+                size="small"
+                color="orange"
+                inverted
+                onClick={e => {
+                  e.stopPropagation();
+                  updateBasket(basket._id, "");
+                }}
+              >
+                <Icon name="trash alternate outline" /> Remove Box
+              </Button>
+            </Modal.Actions>
+          </Modal>
+        )}
+
+        {!basket.name && (
           <div
-            className="thickborder  segmentinlinebox"
+            className="thickborder  segmentinlinebox pointer"
             onClick={event => {
               this.initialEdit();
               onEditClick(basket._id);
             }}
             style={{
               height: "20vh",
-              //    backgroundImage: pattern,
               textAlign: "center"
             }}
           >
-            {/* <Segment
-            className="pointer segmentinlinebox"
-            onClick={event => {
-              this.initialEdit();
-              onEditClick(basket._id);
-            }}
-            style={{ height: "20vh", opacity: opacity }}
-            textAlign="center"
-            basic
-            floated
-          > */}
-
-            {tertiary && (
+            {!edit && (
               <div
                 style={{
                   position: "relative",
@@ -89,40 +112,25 @@ class AddBasket extends Component {
                   transform: "translateY(-50%)"
                 }}
               >
-                {!basket.name && (
-                  <Icon name=" add " className="black" size="big"></Icon>
-                )}
-                {basket.name && (
-                  <p className={`ow big-font ${color}`}>
-                    {basket.name || "Add a new box"}
-                  </p>
-                )}
+                <Icon name="box" className="teal" size="big"></Icon>
+
+                <p
+                  className={`ow big-font teal`}
+                  style={{ marginTop: "10px", fontWeight: "bold" }}
+                >
+                  Click to Add a{" "}
+                  <div style={{ marginTop: "-5px" }}>New Box</div>
+                </p>
               </div>
             )}
 
-            {!tertiary && (
-              <OutsideClickHandler
-                onOutsideClick={() => {
-                  console.log("close edit");
-                  this.props.closeEdit();
-                }}
-              >
-                {/* {basket.name && (
-                  <div
-                    style={{
-                      position: "relative",
-                      top: "50%",
-                      transform: "translateY(-50%)"
-                    }}
-                  >
-                    {!basket.name && (
-                      <Icon name=" add " className="black" size="big"></Icon>
-                    )}
-                    <p className={`ow big-font ${color}`}>
-                      {basket.name || "Add a new box"}
-                    </p>
-                  </div>
-                )} */}
+            <OutsideClickHandler
+              onOutsideClick={() => {
+                console.log("close edit");
+                this.props.closeEdit();
+              }}
+            >
+              {edit && (
                 <textarea
                   type="text"
                   className="black big-font "
@@ -145,21 +153,22 @@ class AddBasket extends Component {
                     }
                   }}
                 />
-                }
+              )}
+              }
+              {edit && (
                 <div style={{ marginTop: `${buttonmargin}` }}>
                   <Button
                     icon
-                    color="orange"
+                    color="grey"
                     basic
                     floated="right"
-                    //onClick={(e) => e.stopPropagation(); updateBasket(basket._id, "")}
                     onClick={e => {
                       e.stopPropagation();
                       updateBasket(basket._id, "");
                     }}
                     size="tiny"
                   >
-                    <Icon name="trash alternate outline "></Icon>
+                    <Icon name="undo alternate"></Icon>
                   </Button>
                   <Button
                     icon="checkmark"
@@ -172,13 +181,18 @@ class AddBasket extends Component {
                     size="tiny"
                   ></Button>
                 </div>
-              </OutsideClickHandler>
-            )}
-            {/* </Segment> */}
+              )}
+            </OutsideClickHandler>
           </div>
-        </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }
+}
 
-        {/* {edit && (
+export default AddBasket;
+
+/* {edit && (
           <div style={{ marginTop: "10px" }}>
             <Segment.Inline>
               <Button
@@ -202,10 +216,16 @@ class AddBasket extends Component {
               ></Button>
             </Segment.Inline>
           </div>
-        )} */}
-      </div>
-    );
-  }
-}
+        )} */
 
-export default AddBasket;
+/* <Segment
+            className="pointer segmentinlinebox"
+            onClick={event => {
+              this.initialEdit();
+              onEditClick(basket._id);
+            }}
+            style={{ height: "20vh", opacity: opacity }}
+            textAlign="center"
+            basic
+            floated
+          > */

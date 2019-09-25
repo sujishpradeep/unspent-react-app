@@ -2,7 +2,7 @@ import http from "./httpservice";
 import { apiUrl } from "../config.json";
 const jwtDecode = require("jwt-decode");
 
-http.setJwt(getJwt());
+http.setJwt(getJwt(), getGoogleToken());
 
 const apiUsers = apiUrl + "/api/users";
 
@@ -15,8 +15,16 @@ export async function login(user) {
   localStorage.setItem("token", jwt);
 }
 
+export async function logingoogle(user) {
+  const response = await http.post(apiUsers + "/authgoogle/", user);
+
+  console.log("jwt", response);
+  localStorage.setItem("token", response.headers["x-auth-token"]);
+}
+
 export function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("gtoken");
 }
 
 export function getCurrentUser() {
@@ -37,6 +45,10 @@ export async function signUp(user) {
 
 export function getJwt() {
   return localStorage.getItem("token");
+}
+
+export function getGoogleToken() {
+  return localStorage.getItem("gtoken");
 }
 
 export default {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { signUp } from "../services/authservice";
+import { signUp, logingoogle } from "../services/authservice";
 
 import {
   Form,
@@ -21,14 +21,32 @@ class SignUp extends Component {
     redirectUser: false
   };
 
-  responseGoogle = response => {
+  responseGoogle = async response => {
     console.log(response);
-    localStorage.setItem("type", "google");
-    localStorage.setItem("token", JSON.stringify(response.tokenObj.id_token));
+    const token = JSON.stringify(response.tokenObj.id_token);
+    localStorage.setItem("gtoken", token);
     this.setState({ redirectUser: true });
-    window.location = "/rewards";
-  };
 
+    console.log("googleprofile", response.profileObj.email);
+    console.log("googleprofile2", response.profileObj["email"]);
+
+    try {
+      const user = {};
+      user.email = response.profileObj.email;
+      user.password = token;
+      user.loginmethod = "gmail";
+      user.fullname = response.profileObj.name;
+      console.log("user", user);
+      await logingoogle(user);
+      window.location = "/rewards";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
   handleSubmit = async () => {
     const { error } = this.validateUser();
 

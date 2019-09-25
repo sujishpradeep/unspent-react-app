@@ -22,3 +22,7 @@ export function updateBoxes(id, boxes) {
 export function getBoxes(id) {
   return http.get(apiAccounts + "boxes/" + id);
 }
+
+export function refreshAccount(id) {
+  return http.post(apiAccounts + "refresh/" + id);
+}

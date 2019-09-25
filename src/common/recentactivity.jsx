@@ -12,7 +12,7 @@ class RecentActivity extends Component {
 
     const sign = activity.category ? "+" : "-";
     // const icon = activity.category ? "newspaper outline" : "gg";
-    const icon = activity.category ? "tags" : "box";
+    const icon = activity.category ? "tags" : "check square";
     return (
       <Segment>
         {/* <Divider></Divider> */}

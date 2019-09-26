@@ -72,6 +72,7 @@ class NavBar extends Component {
     const { visible, isMobile } = this.state;
     const { activeItem } = this.state;
 
+    const pointer = visible && isMobile ? "none" : "auto";
     return (
       <React.Fragment>
         <div className="mobile-view">
@@ -134,8 +135,13 @@ class NavBar extends Component {
               </Menu.Item>
             </Sidebar>
 
-            <Sidebar.Pusher>
-              <div className="main-container">
+            <Sidebar.Pusher
+              onClick={isMobile && visible ? this.handleBookClick : undefined}
+            >
+              <div
+                className="main-container"
+                style={{ pointerEvents: pointer }}
+              >
                 <Route
                   path="/rewards"
                   render={props => (

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Segment, Modal, Item, Icon } from "semantic-ui-react";
 
 import Moment from "moment";
+import Activities from "./activities";
 
 class ActivityCard extends Component {
   state = {};
@@ -39,7 +40,12 @@ class ActivityCard extends Component {
         centered={false}
         size="mini"
       >
-        <Header> All Activities ({type})</Header>
+        <Header as="h3">
+          {type}{" "}
+          <div style={{ padding: 0, fontSize: "15px", fontWeight: "normal" }}>
+            All Activities
+          </div>
+        </Header>
 
         <Modal.Content scrolling>
           {sortedactivities.map((a, index) => (

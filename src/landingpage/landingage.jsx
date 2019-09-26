@@ -34,14 +34,14 @@ class LandingPage extends Component {
             </div>
 
             <div className="main-buttons">
-              <Link
+              <div
                 onClick={() => {
                   window.location = "/login";
                 }}
-                className=" login-button"
+                className="login-button pointer"
               >
                 <b className="white"> Login</b>
-              </Link>
+              </div>
               <div className="pl5 inline"></div>
 
               <Button
@@ -212,7 +212,7 @@ class LandingPage extends Component {
                           Matt skipped his Wednesday Evening Pizza parties for a
                           month and went on an exciting road trip using his
                           Unspent Money! `}
-                          <Icon name="hand peace " color="yellow"></Icon>
+                          <Icon name="hand peace" color="yellow"></Icon>
                         </Comment.Text>
                       </Comment.Content>
                     </Comment>

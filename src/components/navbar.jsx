@@ -88,10 +88,6 @@ class NavBar extends Component {
               </div>
             )}
             {!isMobile && (
-              // <div className="logo">
-              //   <Image src={unspent} size="small"></Image>
-              // </div>
-
               <div className="logo">
                 <h1 className="logo-font"> #Unspent</h1>
               </div>
@@ -141,27 +137,16 @@ class NavBar extends Component {
             <Sidebar.Pusher>
               <div className="main-container">
                 <Route
-                  path="/boxes"
-                  render={props => <Boxes {...props} isMobile={isMobile} />}
-                />
-                <Route
                   path="/rewards"
                   render={props => (
                     <Rewards {...props} accountid={this.props.accountid} />
                   )}
                 />
                 <Route
-                  path="/activity"
-                  render={props => (
-                    <Activities
-                      {...props}
-                      fullname={this.props.fullname}
-                      rewards={this.props.rewards}
-                      redeems={this.props.redeems}
-                    />
-                  )}
+                  path="/boxes"
+                  render={props => <Boxes {...props} isMobile={isMobile} />}
                 />
-
+                <Route path="/activity" component={Activities} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/" exact component={Rewards} />
               </div>
@@ -174,13 +159,3 @@ class NavBar extends Component {
 }
 
 export default NavBar;
-
-/*
-
-<div id="navbar">
-      <div id="nav-unspent">
-
- <Link to="/">Unspent</Link>
-   </div>
-    </div>
- */

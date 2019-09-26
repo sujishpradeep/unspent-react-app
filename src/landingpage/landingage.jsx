@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import "../landingpage.css";
@@ -6,12 +5,9 @@ import { Link } from "react-router-dom";
 import {
   Grid,
   Divider,
-  Input,
   Button,
   Icon,
-  Header,
   Comment,
-  Confirm,
   Segment
 } from "semantic-ui-react";
 import { Image } from "semantic-ui-react";
@@ -182,15 +178,11 @@ class LandingPage extends Component {
                     paddingBottom: "10px",
                     textAlign: "center",
                     color: "rgba(0, 0, 0, 0.87)"
-                    // color: "#ff4081"
                   }}
                 >
                   <Icon name="quote left"></Icon> #Unspent Stories..!{" "}
                   <Icon name="quote right"></Icon>
                   <br></br>
-                  {/* <div className="inline" style={{ fontFamily: "Open Sans" }}>
-                stories!
-              </div> */}
                 </div>
                 <div
                   style={{

@@ -1,23 +1,37 @@
 import React, { Component } from "react";
-import { Grid, Header, Item, Menu, Segment, Divider } from "semantic-ui-react";
+import { Grid, Menu, Segment } from "semantic-ui-react";
 import ActivityCard from "./activitycard";
-import Rewards from "./rewards";
+import authservice from "../services/authservice";
+import { getAccount } from "../services/accountService";
+
 var _ = require("lodash");
 
 class Activities extends Component {
-  state = {};
+  state = {
+    activeItem: "Rewards Earned",
+    rewards: [],
+    redeems: [],
+    isLoading: true
+  };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  componentDidMount() {
-    const activeItem = "Rewards Earned";
-    this.setState({ activeItem });
+  async componentDidMount() {
+    const token = authservice.getCurrentUser();
+    if (token && token.accountid) {
+      const { data } = await getAccount(token.accountid);
+      const { rewards, redeems } = data;
+      const activeItem = "Rewards Earned";
+      this.setState({ activeItem, rewards, redeems, isLoading: false });
+    }
   }
 
   sort = (array, property) => {
     return _.groupBy(array, property);
   };
   render() {
-    const { rewards, redeems } = this.props;
+    const { rewards, redeems, isLoading } = this.state;
+
+    if (isLoading) return <div style={{ height: "100%", width: "100%" }}></div>;
 
     const sortedRewards = this.sort(rewards, "category");
     const sortedRedeems = this.sort(redeems, "box");
@@ -37,7 +51,6 @@ class Activities extends Component {
               name="Rewards Redeemed"
               active={activeItem === "Rewards Redeemed"}
               onClick={this.handleItemClick}
-              textAlign="right"
             />
           </Menu>
 
@@ -45,9 +58,8 @@ class Activities extends Component {
             <div>
               <Grid columns={2} centered>
                 {Object.keys(sortedRewards).map(k => (
-                  <Grid.Column>
+                  <Grid.Column key={k}>
                     <ActivityCard
-                      key={k}
                       activities={sortedRewards[k]}
                       type={k}
                     ></ActivityCard>
@@ -68,9 +80,8 @@ class Activities extends Component {
             <div>
               <Grid columns={2} centered>
                 {Object.keys(sortedRedeems).map(k => (
-                  <Grid.Column>
+                  <Grid.Column key={k}>
                     <ActivityCard
-                      key={k}
                       activities={sortedRedeems[k]}
                       type={k}
                     ></ActivityCard>

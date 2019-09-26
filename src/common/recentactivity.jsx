@@ -11,12 +11,9 @@ class RecentActivity extends Component {
     );
 
     const sign = activity.category ? "+" : "-";
-    // const icon = activity.category ? "newspaper outline" : "gg";
     const icon = activity.category ? "tags" : "check square";
     return (
       <Segment>
-        {/* <Divider></Divider> */}
-
         <Grid columns={2}>
           <Grid.Column width={9}>
             <Item>
@@ -48,30 +45,3 @@ class RecentActivity extends Component {
 }
 
 export default RecentActivity;
-
-{
-  /* <Label color={color} horizontal size="large">
-            
-            </Label> */
-}
-{
-  /* <div className="head inline ">${activity.amount}.00</div> */
-}
-{
-  /* <Item.Meta>
-              {/* <span className="black">{activity.category || activity.box}</span> */
-}
-{
-  /* {displayDate} */
-}
-{
-  /* <Icon name="calendar alternate outline"></Icon> */
-}
-{
-  /* </Item.Meta> */
-}
-{
-  /* <Item.Description>
-              <p className=" ow grey">{activity.notes}</p>
-            </Item.Description> */
-}

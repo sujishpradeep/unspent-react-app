@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import { Grid, Button, Item } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import AddBasket from "../common/addbasket";
-import { saveBox } from "../utils/testRedeemBoxes";
 import { getBoxes, updateBoxes } from "../services/accountService";
 import authservice from "../services/authservice";
-
-var _ = require("lodash");
 
 class Boxes extends Component {
   state = {
     editBasket: {},
     baskets: [],
-    id: ""
+    id: "",
+    isLoading: true
   };
 
   async componentDidMount() {
@@ -25,9 +23,7 @@ class Boxes extends Component {
       name: data[index]
     }));
 
-    console.log("baskets", baskets);
-
-    this.setState({ baskets, id });
+    this.setState({ baskets, id, isLoading: false });
   }
 
   updateBasket = async (id, value) => {
@@ -36,23 +32,12 @@ class Boxes extends Component {
 
     baskets[foundIndex].name = value;
 
-    // baskets = [...Array(baskets.length)].map((b, index) => ({
-    //   _id: index,
-    //   name: baskets[index]
-    // }));
-
-    console.log(" update baskets", baskets.filter(b => b));
-
-    this.setState({ baskets });
-
     const boxes = baskets.filter(b => b.name).map((d, index) => d.name);
-    console.log(" update boxes", boxes);
 
     const baskets2 = [...Array(boxes.length + 1)].map((d, index) => ({
       _id: index,
       name: boxes[index]
     }));
-
     await updateBoxes(this.state.id, boxes);
 
     this.setState({ baskets: baskets2 });
@@ -71,7 +56,9 @@ class Boxes extends Component {
   };
 
   render() {
-    const { baskets, editBasket } = this.state;
+    const { baskets, editBasket, isLoading } = this.state;
+
+    if (isLoading) return <div style={{ height: "100%", width: "100%" }}></div>;
 
     let boxes = [...baskets];
     boxes = boxes.filter(b => b.name);
@@ -79,7 +66,6 @@ class Boxes extends Component {
     if (boxes.length < 6) {
       boxes.push({ _id: boxes.length, name: "" });
     }
-    console.log("render baskets", baskets, editBasket);
 
     const { isMobile } = this.props;
 
@@ -90,10 +76,9 @@ class Boxes extends Component {
       <React.Fragment>
         <div style={styles}>
           <Grid columns={2}>
-            {boxes.map(b => (
-              <Grid.Column style={{ height: "27vh" }}>
+            {boxes.map((b, index) => (
+              <Grid.Column style={{ height: "27vh" }} key={b._id}>
                 <AddBasket
-                  key={b._id}
                   basket={b}
                   updateBasket={this.updateBasket}
                   onEditClick={this.onEditClick}
@@ -105,43 +90,9 @@ class Boxes extends Component {
             ))}
           </Grid>
         </div>
-        {/* <div
-          style={{
-            position: "relative",
-            top: "100%",
-            transform: "translateY(-50%)",
-            textAlign: "center",
-            margin: "auto"
-          }}
-        >
-          <div className="add-button pointer">
-            <div className="button-text"> + </div>
-          </div>
-        </div> */}
       </React.Fragment>
     );
   }
 }
 
 export default Boxes;
-
-/*
-<Button
-                basic
-                icon="pencil alternate"
-                color="black"
-                textAlign="center"
-                attached="right"
-              ></Button>
-              <Header as="h2" className="inline black" textAlign="left">
-                Add new basket
-              </Header>
-               <AddBasket
-          key={"new"}
-          basket={{ _id: "new" }}
-          updateBasket={this.updateBasket}
-          onEditClick={this.onEditClick}
-          closeEdit={this.closeEdit}
-          edit={editBasket._id === "new"}
-        ></AddBasket>
-*/

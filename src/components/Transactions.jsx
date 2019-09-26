@@ -75,11 +75,3 @@ class Transactions extends Component {
 }
 
 export default Transactions;
-
-/*
-
-<Label as="a" ribbon size="big" color="brown">
-            <div className="brown">Transactions</div>
-          </Label>
-
-          */

@@ -17,8 +17,6 @@ export async function login(user) {
 
 export async function logingoogle(user) {
   const response = await http.post(apiUsers + "/authgoogle/", user);
-
-  console.log("jwt", response);
   localStorage.setItem("token", response.headers["x-auth-token"]);
 }
 
@@ -37,8 +35,6 @@ export function getCurrentUser() {
 }
 
 export async function signUp(user) {
-  console.log("sign up auth");
-
   const response = await http.post(apiUsers, user);
   localStorage.setItem("token", response.headers["x-auth-token"]);
 }

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Modal, Button, Icon, Container } from "semantic-ui-react";
+import { Modal, Button, Icon } from "semantic-ui-react";
 import OutsideClickHandler from "react-outside-click-handler";
-import { pattern } from "../box-images/pattern.png";
-//import { colo } from "/colo.png";
 
 class AddBasket extends Component {
   state = { basketNew: "" };
@@ -19,9 +17,7 @@ class AddBasket extends Component {
     this.setState({ basketNew });
   };
 
-  onClickInfo = () => {
-    console.log("on Click Infp");
-  };
+  close = () => this.setState({ open: false });
 
   render() {
     let { updateBasket, onEditClick, edit, basket } = this.props;
@@ -32,17 +28,19 @@ class AddBasket extends Component {
     const color = secondary ? "#FFFFFf" : "#FFFFFf";
 
     const buttonmargin = this.props.isMobile ? "16px" : "17px";
-    const tertiary = !edit || (edit && basket.name);
 
     return (
       <React.Fragment>
         {basket.name && (
           <Modal
+            open={this.state.open}
+            onClose={this.close}
             trigger={
               <div
                 className="thickborder  segmentinlinebox pointer"
                 onClick={event => {
                   this.initialEdit();
+                  this.setState({ open: true });
                   onEditClick(basket._id);
                 }}
                 style={{
@@ -83,6 +81,7 @@ class AddBasket extends Component {
                 inverted
                 onClick={e => {
                   e.stopPropagation();
+                  this.close();
                   updateBasket(basket._id, "");
                 }}
               >
@@ -114,19 +113,18 @@ class AddBasket extends Component {
               >
                 <Icon name="box" className="teal" size="big"></Icon>
 
-                <p
+                <div
                   className={`ow big-font teal`}
                   style={{ marginTop: "10px", fontWeight: "bold" }}
                 >
                   Click to Add a{" "}
                   <div style={{ marginTop: "-5px" }}>New Box</div>
-                </p>
+                </div>
               </div>
             )}
 
             <OutsideClickHandler
               onOutsideClick={() => {
-                console.log("close edit");
                 this.props.closeEdit();
               }}
             >
@@ -191,41 +189,3 @@ class AddBasket extends Component {
 }
 
 export default AddBasket;
-
-/* {edit && (
-          <div style={{ marginTop: "10px" }}>
-            <Segment.Inline>
-              <Button
-                icon
-                basic
-                color="grey"
-                floated="right"
-                //onClick={(e) => e.stopPropagation(); updateBasket(basket._id, "")}
-                onClick={e => {
-                  e.stopPropagation();
-                  updateBasket(basket._id, "");
-                }}
-              >
-                <Icon name="trash alternate outline "></Icon>
-              </Button>
-              <Button
-                icon="checkmark"
-                basic
-                color="black"
-                onClick={() => updateBasket(basket._id, basketValue)}
-              ></Button>
-            </Segment.Inline>
-          </div>
-        )} */
-
-/* <Segment
-            className="pointer segmentinlinebox"
-            onClick={event => {
-              this.initialEdit();
-              onEditClick(basket._id);
-            }}
-            style={{ height: "20vh", opacity: opacity }}
-            textAlign="center"
-            basic
-            floated
-          > */

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Header, Segment, Modal, Item, Icon, Grid } from "semantic-ui-react";
+import { Header, Segment, Modal, Item, Icon } from "semantic-ui-react";
 
 import Moment from "moment";
-import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
 
 class ActivityCard extends Component {
   state = {};
@@ -20,11 +19,10 @@ class ActivityCard extends Component {
   render() {
     const { activities, type } = this.props;
     const { showModal } = this.state;
-
-    console.log("Activities", activities);
     const total = activities.reduce((a, b) => +a + +b.amount, 0);
 
-    const icon = activities[0].category ? "tags" : "check square";
+    const sortedactivities = activities.reverse();
+    const icon = sortedactivities[0].category ? "tags" : "check square";
 
     return (
       <Modal
@@ -33,9 +31,7 @@ class ActivityCard extends Component {
         trigger={
           <Segment onClick={this.loadModal} className="pointer">
             <Icon name="chevron circle right" color="teal"></Icon>
-            {/* <Icon name="play circle" color="teal"></Icon> */}
             <div className="activityheader black inline">{type}</div>
-
             <div className="activitysubheader ow">+{total}.00</div>
           </Segment>
         }
@@ -43,14 +39,14 @@ class ActivityCard extends Component {
         centered={false}
         size="mini"
       >
-        <Header> All Activities - {type}</Header>
+        <Header> All Activities ({type})</Header>
 
         <Modal.Content scrolling>
-          {activities.map(a => (
-            <Segment>
+          {sortedactivities.map((a, index) => (
+            <Segment key={index}>
               <Item>
                 <Item.Content>
-                  <Icon name={icon} color="grey"></Icon>
+                  <Icon name={icon} color="teal"></Icon>
                   {a.amount}.00
                   <span className="ar black">
                     {Moment(a.date, "YYYY-MM-DD").format("Do MMM, YYYY")}

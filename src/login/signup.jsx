@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import { signUp, logingoogle } from "../services/authservice";
 
-import {
-  Form,
-  Button,
-  Label,
-  Segment,
-  Divider,
-  Message
-} from "semantic-ui-react";
+import { Form, Button, Segment, Divider, Message } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 import { Link } from "react-router-dom";
 var _ = require("lodash");
@@ -22,13 +15,9 @@ class SignUp extends Component {
   };
 
   responseGoogle = async response => {
-    console.log(response);
     const token = JSON.stringify(response.tokenObj.id_token);
     localStorage.setItem("gtoken", token);
     this.setState({ redirectUser: true });
-
-    console.log("googleprofile", response.profileObj.email);
-    console.log("googleprofile2", response.profileObj["email"]);
 
     try {
       const user = {};
@@ -36,7 +25,6 @@ class SignUp extends Component {
       user.password = token;
       user.loginmethod = "gmail";
       user.fullname = response.profileObj.name;
-      console.log("user", user);
       await logingoogle(user);
       window.location = "/rewards";
     } catch (ex) {
@@ -58,16 +46,12 @@ class SignUp extends Component {
 
     this.setState({ errors: errors });
     if (error) {
-      console.log("error", error);
       return;
     }
-
-    console.log("NOT ERROR");
 
     try {
       const { user } = this.state;
       user.loginmethod = "email";
-      console.log("user", user);
       await signUp(user);
       window.location = `/rewards`;
     } catch (ex) {
@@ -83,13 +67,6 @@ class SignUp extends Component {
     if (this.state.user.hasOwnProperty(name)) {
       let { user } = this.state;
       user[name] = value;
-      // delete errors[name];
-
-      //   const { error } = this.validateProperty(name, value);
-
-      //   if (error) {
-      //     for (let item of error.details) errors[item.path[0]] = item.message;
-      //   }
       this.setState({ user });
     }
   };
@@ -132,12 +109,6 @@ class SignUp extends Component {
     loginmethod: Joi.string().optional()
   });
 
-  //   validateProperty = (name, value) => {
-  //     const obj = { [name]: value };
-  //     const schema = { [name]: this.schema[name] };
-  //     return Joi.validate(obj, schema);
-  //   };
-
   validateUser = () => {
     const { user } = this.state;
 
@@ -147,7 +118,6 @@ class SignUp extends Component {
 
   render() {
     const { errors } = this.state;
-    console.log("errors", errors);
 
     return (
       <div className="new-container">

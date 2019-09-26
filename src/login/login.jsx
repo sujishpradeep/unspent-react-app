@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 
-import {
-  Form,
-  Button,
-  Label,
-  Segment,
-  Divider,
-  Message
-} from "semantic-ui-react";
+import { Form, Button, Segment, Divider, Message } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
-import { login, signUp, logingoogle } from "../services/authservice";
+import { login, logingoogle } from "../services/authservice";
 import { Link } from "react-router-dom";
 var _ = require("lodash");
-const Joi = require("joi");
 
 class Login extends Component {
   state = {
@@ -22,13 +14,9 @@ class Login extends Component {
   };
 
   responseGoogle = async response => {
-    console.log(response);
     const token = JSON.stringify(response.tokenObj.id_token);
     localStorage.setItem("gtoken", token);
     this.setState({ redirectUser: true });
-
-    console.log("googleprofile", response.profileObj.email);
-    console.log("googleprofile2", response.profileObj["email"]);
 
     try {
       const user = {};
@@ -36,7 +24,6 @@ class Login extends Component {
       user.password = token;
       user.loginmethod = "gmail";
       user.fullname = response.profileObj.name;
-      console.log("user", user);
       await logingoogle(user);
       window.location = "/rewards";
     } catch (ex) {

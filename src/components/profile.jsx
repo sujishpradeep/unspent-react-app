@@ -1,23 +1,14 @@
 import React, { Component } from "react";
 import {
-  Form,
-  Input,
   Button,
   Modal,
   Label,
-  Container,
-  Icon,
   Divider,
   Segment,
-  Header,
   Grid
 } from "semantic-ui-react";
-import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
 import authservice from "../services/authservice";
 import { refreshAccount } from "../services/accountService";
-var cc = require("currency-codes/data");
-
-var _ = require("lodash");
 
 class Profile extends Component {
   state = {};
@@ -34,7 +25,6 @@ class Profile extends Component {
     this.setState({ activeItem, id, email });
   }
   logOut = () => {
-    console.log("logout");
     authservice.logout();
     window.location = "/";
   };
@@ -46,19 +36,6 @@ class Profile extends Component {
   };
 
   render() {
-    const { rewards, redeems } = this.props;
-    console.log(cc);
-
-    const options = cc.map(c => {
-      const container = {};
-
-      container["key"] = c.code;
-      container["value"] = c.code;
-      container["text"] = `${c.code} - ${c.currency}`;
-
-      return container;
-    });
-    console.log("options", options);
     const { showModal } = this.state;
 
     return (

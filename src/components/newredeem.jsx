@@ -10,8 +10,7 @@ import {
   Label,
   Icon,
   Segment,
-  List,
-  Message
+  List
 } from "semantic-ui-react";
 
 import { DateInput } from "semantic-ui-calendar-react";
@@ -95,8 +94,6 @@ class NewRedeem extends Component {
     redeem.date = currentDate;
     redeem.amount = "";
 
-    console.log("redeem baskets", baskets);
-
     errors = {};
     this.setState({
       showModal: true,
@@ -119,22 +116,10 @@ class NewRedeem extends Component {
       availableAmount
     } = this.state;
     const { box } = redeem;
-    console.log("errors", errors);
-
-    const { grossUsage } = this.props;
     const disabled = availableAmount === 0 || _.isEmpty(baskets);
 
     return (
       <React.Fragment>
-        {/* <Header as="h2" textAlign="center">
-          <Header.Content>
-            <div className="inline">${grossUsage}.00</div>
-            <Header.Subheader>
-              <div className="inline">Redeemed</div>
-            </Header.Subheader>
-          </Header.Content>
-        </Header> */}
-
         <Modal
           onClose={this.closeModal}
           open={showModal}
@@ -253,12 +238,13 @@ class NewRedeem extends Component {
 
                   <Dropdown
                     text={box || "Select the Redeem Box"}
-                    selection
                     onChange={this.handleChange}
                     fluid
+                    basic
+                    button
                     disabled={disabled}
                   >
-                    <Dropdown.Menu fluid>
+                    <Dropdown.Menu fluid="true">
                       {baskets.map(
                         (d, index) =>
                           d.name && (

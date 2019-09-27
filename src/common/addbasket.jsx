@@ -41,7 +41,6 @@ class AddBasket extends Component {
                 onClick={event => {
                   this.initialEdit();
                   this.setState({ open: true });
-                  onEditClick(basket._id);
                 }}
                 style={{
                   height: "20vh",
@@ -77,15 +76,15 @@ class AddBasket extends Component {
             <Modal.Actions>
               <Button
                 size="small"
-                color="orange"
-                inverted
+                color="red"
                 onClick={e => {
                   e.stopPropagation();
                   this.close();
                   updateBasket(basket._id, "");
                 }}
+                floated="left"
               >
-                <Icon name="trash alternate outline" /> Remove Box
+                <Icon name="trash alternate outline" /> Delete Box
               </Button>
             </Modal.Actions>
           </Modal>

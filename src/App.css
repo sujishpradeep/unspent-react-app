@@ -33,6 +33,11 @@ body {
   background-color: #f9f9f9;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .black {
   color: #1b1c1d;
 }
